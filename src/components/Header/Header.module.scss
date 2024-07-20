@@ -1,0 +1,14 @@
+.container {
+  max-width: 1920px;
+  height: 84px;
+  background-color: #2231aa;
+  .headerButton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .rightButton {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

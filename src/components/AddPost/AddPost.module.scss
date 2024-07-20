@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  padding: 40px 0;
+  flex-direction: column;
+  flex: 1;
+  margin: 0px auto;
+  background-color: #f3f3f3;
+  .home {
+    width: 600px;
+    color: #313037;
+    text-align: center;
+    // margin: auto;
+
+    &:hover {
+      color: #5360cd;
+      cursor: pointer;
+    }
+  }
+  .title {
+    text-align: center;
+  }
+  .form {
+    margin: 0 auto;
+    .text {
+      margin: 30px 0;
+    }
+    .description {
+      margin: 30px 0;
+    }
+  }
+  .btnButtons {
+    width: 600px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px auto 0;
+    .rightButton {
+      width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+.darkContainer {
+  background-color: #313037;
+}
+.darkHome {
+  color: #ffffff;
+}
+.darkHomeP {
+  color: #ffffff;
+  &:hover {
+    color: #5360cd;
+    cursor: pointer;
+  }
+}

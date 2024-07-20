@@ -1,0 +1,16 @@
+@mixin Title {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 80px;
+  width: 900px;
+  margin: auto;
+}
+.title {
+  @include Title();
+  color: #313037;
+}
+.darkTitle {
+  color: #fff;
+}

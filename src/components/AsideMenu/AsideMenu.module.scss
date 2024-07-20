@@ -1,0 +1,24 @@
+.container {
+  background-color: #cbc9c9;
+  height: 640px;
+  position: absolute;
+  left: 0;
+  top: 84px;
+  .buttons {
+    height: 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.themeButtons {
+  display: flex;
+}
+.darkContainer {
+  background-color: #313037;
+}
+.darkLightTheme {
+  background-color: #000000;
+  color: #ffffff;
+}
