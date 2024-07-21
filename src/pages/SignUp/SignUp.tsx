@@ -3,8 +3,15 @@ import styles from "./SignUp.module.scss";
 import FormPagesContainer from "../../components/FormPagesContainer";
 import Input from "../../components/Input";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../../components/Router/Router";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+
+    const onNavigateToSignIn = () => {
+        navigate(RoutesList.SignIn);
+    };
     return (
         <div className={styles.signUp}>
             <div className={styles.signUpContainer}>
@@ -15,7 +22,9 @@ const SignUp = () => {
                     additionalInfo={
                         <div className={styles.additionalInfo}>
                             {"Already have an account?"}
-                            <span className={styles.signIn}>Sign In</span>
+                            <span onClick={onNavigateToSignIn} className={styles.signIn}>
+                                Sign In
+                            </span>
                         </div>
                     }
                 >

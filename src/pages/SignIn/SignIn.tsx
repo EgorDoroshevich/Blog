@@ -6,6 +6,8 @@ import FormPagesContainer from "../../components/FormPagesContainer";
 import Input from "../../components/Input";
 import { Theme } from "../../components/config";
 import Header from "../../components/Header";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../../components/Router/Router";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -13,12 +15,20 @@ const SignIn = () => {
 
     const { themeValue } = useThemeContext();
 
+    const navigate = useNavigate();
+
+    const onNavigateToSignUp = () => {
+        navigate(RoutesList.SignUp);
+    };
+
+
     return (
         <div>
             <FormPagesContainer
                 title={"Sign In"}
                 btnTitle={"Sign In"}
                 onSubmit={() => { }}
+
                 additionalInfo={
                     <div
                         className={classNames(styles.additionalInfo, {
@@ -26,7 +36,12 @@ const SignIn = () => {
                         })}
                     >
                         {"Don’t have an account?"}
-                        <span className={classNames(styles.signUp)}>Sign Up</span>
+                        <span
+                            onClick={onNavigateToSignUp}
+                            className={classNames(styles.signUp)}
+                        >
+                            Sign Up
+                        </span>
                     </div>
                 }
             >
@@ -52,7 +67,6 @@ const SignIn = () => {
                     </div>
                 </div>
             </FormPagesContainer>
-
         </div>
     );
 };

@@ -27,6 +27,7 @@ const AsideMenu = () => {
     const onNavigateToSignUp = () => {
         navigate(RoutesList.SignUp);
     };
+
     return (
         <div>
             <div

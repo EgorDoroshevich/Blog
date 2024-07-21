@@ -7,6 +7,8 @@ import { ButtonSize } from "../Button/Button";
 import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
 import { Theme } from "../config";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../Router/Router";
 
 type FormPagesContainerProps = {
     title: string;
@@ -24,13 +26,42 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
     additionalInfo,
 }) => {
     const { themeValue } = useThemeContext();
+    const navigate = useNavigate();
+    const onNavigateToHome = () => {
+        navigate(RoutesList.Home);
+    };
     return (
-        <div className={classNames(styles.container, { [styles.darkContainer]: themeValue === Theme.dark })}>
-            <div className={classNames(styles.breadcrumbs, { [styles.darkBreadcrumbs]: themeValue === Theme.dark })}>Back to home</div>
+        <div
+            className={classNames(styles.container, {
+                [styles.darkContainer]: themeValue === Theme.dark,
+            })}
+        >
+            <div
+                onClick={onNavigateToHome}
+                className={classNames(styles.breadcrumbs, {
+                    [styles.darkBreadcrumbs]: themeValue === Theme.dark,
+                })}
+            >
+                Back to home
+            </div>
             <Title title={title} />
-            <div className={classNames(styles.formContainer, { [styles.darkFormContainer]: themeValue === Theme.dark })}>
-                <div className={classNames(styles.fieldsContainer, { [styles.darkFieldsContainer]: themeValue === Theme.dark })}>{children}</div>
-                <div className={classNames(styles.button, { [styles.darkButton]: themeValue === Theme.dark })}>
+            <div
+                className={classNames(styles.formContainer, {
+                    [styles.darkFormContainer]: themeValue === Theme.dark,
+                })}
+            >
+                <div
+                    className={classNames(styles.fieldsContainer, {
+                        [styles.darkFieldsContainer]: themeValue === Theme.dark,
+                    })}
+                >
+                    {children}
+                </div>
+                <div
+                    className={classNames(styles.button, {
+                        [styles.darkButton]: themeValue === Theme.dark,
+                    })}
+                >
                     <Button type={ButtonSize.large} title={btnTitle} onClick={onSubmit} />
                 </div>
                 <div>{additionalInfo}</div>

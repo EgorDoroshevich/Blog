@@ -9,6 +9,8 @@ import Title from "../Title";
 import { useThemeContext } from "../../context/Theme";
 import classNames from "classnames";
 import { Theme } from "../config";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../Router/Router";
 
 type AddPostProps = {
     title: string;
@@ -16,6 +18,10 @@ type AddPostProps = {
 
 const AddPost = () => {
     const { themeValue } = useThemeContext();
+    const navigate = useNavigate()
+    const onNavigateToHome = () => {
+        navigate(RoutesList.Home)
+    }
     return (
         <div
             className={classNames(styles.container, {
@@ -23,7 +29,7 @@ const AddPost = () => {
             })}
         >
             <div
-                onClick={() => { }}
+                onClick={onNavigateToHome}
                 className={classNames(styles.home, {
                     [styles.darkHome]: themeValue === Theme.dark,
                 })}
