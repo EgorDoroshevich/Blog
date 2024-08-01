@@ -7,7 +7,7 @@ const SaveIcon = ({ width = "24", height = "24", fill = "#313037" }) => {
                 width={width}
                 height={height}
                 viewBox="0 0 24 24"
-                fill="none"
+                fill={fill}
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path

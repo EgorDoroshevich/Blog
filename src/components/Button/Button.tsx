@@ -15,7 +15,7 @@ export enum ButtonSize {
 type ButtonProps = {
     type: ButtonSize;
     title: string | ReactElement;
-    onClick: () => void;
+    onClick: (e: any) => void;
     disabled?: boolean;
     icon?: ReactElement | undefined;
     className?: string;

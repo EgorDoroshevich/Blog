@@ -21,19 +21,24 @@ const Input = ({
 }: InputProps) => {
   const { themeValue } = useThemeContext();
 
+  const [text, setText] = useState("");
+
   const onInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    onChange(event.target.value);
+    setText(event.target.value);
+    if (onChange) {
+      onChange(event.target.value);
+    }
   };
 
   const inputProps = {
     onChange: onInputChange,
-    value,
+    value: text,
     placeholder,
   };
   return (
-    <div >
+    <div>
       {!disablead ? (
         <div>
           <div

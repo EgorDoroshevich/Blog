@@ -9,10 +9,12 @@ import ThemeContext, { useThemeContext } from "../../context/Theme/Context";
 import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import AsideMenu from "../AsideMenu";
 import Search from "../Search";
+import UserName from "../UserName";
 
 const Header = () => {
     const [burger, setBurger] = useState<boolean>(true);
     const [search, setSearch] = useState<boolean>(true);
+    const [isLog, setIsLog] = useState<boolean>(false);
 
     const onClickBurger = () => {
         setBurger((prevState) => !prevState);
@@ -42,11 +44,15 @@ const Header = () => {
                                 onClick={onSearch}
                             />
                         )}
-                        <Button
-                            type={ButtonSize.headerButton}
-                            title={<ProfileIcon />}
-                            onClick={() => { }}
-                        />
+                        {!isLog ? (
+                            <Button
+                                type={ButtonSize.headerButton}
+                                title={<ProfileIcon />}
+                                onClick={() => { }}
+                            />
+                        ) : (
+                            <UserName name="Artem Martin" />
+                        )}
                     </div>
                 </div>
             </div>

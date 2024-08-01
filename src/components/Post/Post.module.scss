@@ -31,6 +31,10 @@
       .postImage {
         width: 256px;
         height: 244px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         & img {
           width: 100%;
           height: 100%;
@@ -125,6 +129,10 @@
       .postImage {
         width: 352px;
         height: 246px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         & img {
           width: 100%;
           height: 100%;
@@ -219,6 +227,10 @@
       .postImage {
         width: 96px;
         height: 96px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         & img {
           width: 100%;
           height: 100%;
@@ -253,6 +265,103 @@
           color: #313037;
           svg > path {
             fill: transparent;
+          }
+        }
+      }
+      .buttonInfo {
+        width: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .save {
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .more {
+          margin: 0 15px;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+.Modal {
+  .postContainer {
+    width: 1170px;
+    border-bottom: 1px solid #dadada;
+    margin: auto;
+    .postHead {
+      width: 1170px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: space-between;
+      align-items: center;
+      .postText {
+        width: 800px;
+        padding: 20px;
+        .postDate {
+          width: 200px;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+          color: #8d8e97;
+        }
+        .postTitle {
+          font-weight: 700;
+          font-size: 32px;
+          line-height: 44px;
+          color: #313037;
+        }
+        .postText {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 28px;
+          color: #8d8e97;
+        }
+      }
+      .postImage {
+        width: 600px;
+        height: 600px;
+        & img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+    .postButton {
+      width: 800px;
+      height: 65.5px;
+      gap: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: auto;
+      margin-bottom: 150px;
+      .buttonLike {
+        width: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .like {
+          margin: 0, 5px;
+          width: 40px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .disLikeIcon {
+            color: #313037;
+            svg > path {
+              fill: transparent;
+            }
+          }
+          &:hover {
+            cursor: pointer;
           }
         }
       }
@@ -316,4 +425,11 @@
   svg > path {
     fill: #313037;
   }
+}
+
+.postImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

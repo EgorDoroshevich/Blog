@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AddPost.module.scss";
-import FormPagesContainer from "../FormPagesContainer";
 import Button from "../Button";
 import { ButtonSize } from "../Button/Button";
 import Input from "../Input";
@@ -12,16 +11,40 @@ import { Theme } from "../config";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
 
-type AddPostProps = {
-    title: string;
-};
-
 const AddPost = () => {
     const { themeValue } = useThemeContext();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const onNavigateToHome = () => {
-        navigate(RoutesList.Home)
-    }
+        navigate(RoutesList.Home);
+    };
+
+    const [title, setTitle] = useState("");
+    const [lessonNumber, setLessonNumber] = useState("");
+    const [image, setImage] = useState("");
+    const [description, setDescription] = useState("");
+    const [text, setText] = useState("");
+
+    const hanleSubmit = async (e: any) => {
+        e.preventDefault();
+        const postData = { title, lessonNumber, image, description, text };
+        try {
+            const response = await fetch("/api/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData),
+            });
+            if (response.ok) {
+                navigate(RoutesList.Home);
+            } else {
+                console.error("Failed to submit post");
+            }
+        } catch {
+            console.error("Error submitting post:", Error);
+        }
+    };
+
     return (
         <div
             className={classNames(styles.container, {
@@ -49,7 +72,8 @@ const AddPost = () => {
             >
                 <Title title={"Add Post"} />
             </div>
-            <div
+            <form
+                onSubmit={hanleSubmit}
                 className={classNames(styles.form, {
                     [styles.darkForm]: themeValue === Theme.dark,
                 })}
@@ -59,7 +83,12 @@ const AddPost = () => {
                         [styles.darkInputTitle]: themeValue === Theme.dark,
                     })}
                 >
-                    <Input onChange={() => { }} title={"Title"} placeholder={"title"} />
+                    <Input
+                        value={title}
+                        onChange={(e) => setTitle(title)}
+                        title={"Title"}
+                        placeholder={"title"}
+                    />
                 </div>
                 <div
                     className={classNames(styles.inputImage, {
@@ -67,11 +96,17 @@ const AddPost = () => {
                     })}
                 >
                     <Input
+                        value={image}
                         placeholder={"lesson"}
                         title={"lesson number"}
                         onChange={() => { }}
                     />
-                    <Input placeholder={"image"} title={"Image"} onChange={() => { }} />
+                    <Input
+                        value={image}
+                        placeholder={"image"}
+                        title={"Image"}
+                        onChange={(e) => setImage(image)}
+                    />
                 </div>
                 <div
                     className={classNames(styles.description, {
@@ -80,8 +115,8 @@ const AddPost = () => {
                 >
                     <Textarea
                         title={"Description"}
-                        onChange={() => { }}
-                        value=""
+                        onChange={(e) => setDescription(description)}
+                        value={description}
                         placeholder=""
                     />
                 </div>
@@ -92,12 +127,12 @@ const AddPost = () => {
                 >
                     <Textarea
                         title={"Text"}
-                        onChange={() => { }}
-                        value=""
+                        onChange={(e) => setText(text)}
+                        value={text}
                         placeholder=""
                     />
                 </div>
-            </div>
+            </form>
 
             <div
                 className={classNames(styles.btnButtons, {
@@ -126,7 +161,7 @@ const AddPost = () => {
                         type={ButtonSize.cancel}
                     />
                     <Button
-                        onClick={() => { }}
+                        onClick={hanleSubmit}
                         title={"Add post"}
                         type={ButtonSize.small}
                     />

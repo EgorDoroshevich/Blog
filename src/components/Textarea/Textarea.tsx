@@ -13,16 +13,20 @@ type TextProps = {
 
 const Textarea: FC<TextProps> = ({ value, placeholder, onChange, title }) => {
     const { themeValue } = useThemeContext();
+    const [text, setText] = useState("");
 
     const onTextChange = (
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-        onChange(event.target.value);
+        setText(event.target.value);
+        if (onChange) {
+            onChange(event.target.value);
+        }
     };
 
     const textareaProps = {
         onChange: onTextChange,
-        value,
+        value: text,
         placeholder,
     };
 

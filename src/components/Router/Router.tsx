@@ -7,6 +7,7 @@ import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import AddPost from "../AddPost";
 import RegistrationConfirmation from "../../pages/RegistrationConfirmation";
+import Modal from "../Modal";
 
 export enum RoutesList {
     Home = "/Home",
@@ -15,6 +16,7 @@ export enum RoutesList {
     RegistrationConfirmation = "/sign-up/confirm",
     AddPost = "AddPost",
     Default = "*",
+    Modal = "modal,",
 }
 
 const AppRouter = () => {
@@ -30,6 +32,8 @@ const AppRouter = () => {
                     element={<RegistrationConfirmation />}
                 />
                 <Route path={RoutesList.AddPost} element={<AddPost />} />
+                <Route path={RoutesList.Default} element={<Home />} />
+                <Route path={RoutesList.Modal} element={<Modal />} />
             </Routes>
         </div>
     );

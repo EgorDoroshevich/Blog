@@ -1,28 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "./App.css";
-import Header from "./components/Header";
-import Post from "./components/Post";
 import { PostSize, Theme } from "./components/config";
-import PostList from "./components/PostList";
 import { ThemeProvider } from "./context/Theme";
-import Tab, { TabsTypes } from "./components/Tab/Tab";
-import TabList from "./components/TabList";
-import AddPost from "./components/AddPost";
-import ThemeContext from "./context/Theme/Context";
-import AsideMenu from "./components/AsideMenu";
-import SignIn from "./pages/SignIn";
-import Input from "./components/Input";
-import FormPagesContainer from "./components/FormPagesContainer";
-import classNames from "classnames";
-import Home from "./components/Home";
-import SignUp from "./pages/SignUp";
-import Success from "./pages/Success";
-import NewPassword from "./pages/NewPassword";
-import RegistrationConfirmation from "./pages/RegistrationConfirmation";
-import ResetPassword from "./pages/ResetPassword";
-import Router from "./components/Router/Router";
 import AppRouter from "./components/Router/Router";
+import { useDispatch, useSelector } from "react-redux";
+import { ThemeSelectors, setThemeValue } from "./redux/store/slices/themeSlice";
 
 const data = [
   {
@@ -115,14 +98,17 @@ const data = [
   },
 ];
 function App() {
-  const [themeValue, setThemeValue] = useState<Theme>(Theme.light);
+  const dispath = useDispatch();
 
-  const onChange = (value: Theme) => () => {
-    setThemeValue(value);
+  const themeValue = useSelector(ThemeSelectors.getIsTheme);
+
+  const onChangeTheme = (value: Theme) => () => {
+    dispath(setThemeValue(value));
   };
+
   return (
     <div>
-      <ThemeProvider onChangeTheme={onChange} themeValue={themeValue}>
+      <ThemeProvider onChangeTheme={onChangeTheme} themeValue={themeValue}>
         <AppRouter />
       </ThemeProvider>
     </div>

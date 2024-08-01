@@ -1,6 +1,6 @@
 import React from "react";
 
-const CloseIcon = ({ width = "24", height = "24", fill = "#fff" }) => {
+const CloseIcon = ({ width = "24", height = "24", fill = "#000" }) => {
     return (
         <div>
             <svg

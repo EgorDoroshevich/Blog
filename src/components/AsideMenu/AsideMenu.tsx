@@ -9,6 +9,7 @@ import { Theme } from "../config";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
+import UserName from "../UserName";
 
 const AsideMenu = () => {
     const { themeValue, onChangeTheme } = useThemeContext();
@@ -28,6 +29,9 @@ const AsideMenu = () => {
         navigate(RoutesList.SignUp);
     };
 
+    const onNavigateToModal = () => {
+        navigate(RoutesList.Modal);
+    };
     return (
         <div>
             <div
@@ -38,9 +42,15 @@ const AsideMenu = () => {
                 <div className={styles.name}></div>
                 <div className={styles.buttons}>
                     <div className={styles.asideMenuButtons}>
+                        <UserName name="Artem Martin" />
                         <Button
                             onClick={onClickHome}
                             title={"Home"}
+                            type={ButtonSize.aside}
+                        />
+                        <Button
+                            onClick={onNavigateToModal}
+                            title={"Modal"}
                             type={ButtonSize.aside}
                         />
                         <Button

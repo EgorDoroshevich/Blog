@@ -14,7 +14,7 @@ type TabsProps = {
     type: TabsTypes;
     title: string;
     onClick: () => void;
-    active?: boolean;
+    active: boolean;
     disabled?: boolean;
 };
 

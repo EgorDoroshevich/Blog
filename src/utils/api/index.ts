@@ -1,6 +1,4 @@
-import { create } from "apisauce";
+import axios from "axios";
+import { create } from "domain";
 
-export const API = create({
-  baseURL: "https://studapi.teachmeskills.by",
-});
-console.log(API);
+const Post = axios.post("http://localhost:8000/api/posts/");

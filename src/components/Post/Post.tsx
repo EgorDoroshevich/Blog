@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useState } from "react";
 import styles from "./Post.module.scss";
 import { PostProps, PostSize, Theme } from "../config";
 import LikeIcon from "../../icons/LikeIcon/LikeIcon";
@@ -7,23 +7,46 @@ import SaveIcon from "../../icons/SaveIcon/SaveIcon";
 import MoreIcon from "../../icons/MoreIcon/MoreIcon";
 import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
+import { useNavigate } from "react-router-dom";
+import { RoutesList } from "../Router/Router";
+import { useDispatch, useSelector } from "react-redux";
+import { LikeSelectors, setLike } from "../../redux/store/slices/likeSlice";
 
-const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
+const Post: FC<PostProps> = ({ type, id, image, content, date, title }) => {
     const PostType = styles[type];
+
+    const [like, setLikeState] = useState<boolean>(true);
 
     const { themeValue } = useThemeContext();
 
-    const [count, setCount] = useState<boolean>(false);
-    const [like, setLike] = useState(0);
+    const dispatch = useDispatch();
 
-    const onPressLike = () => {
-        setCount((prevState) => !prevState);
-        if (count === false) {
-            setLike(like + 1);
-        } else {
-            setLike(like - 1);
-        }
+    const isLike = useSelector(LikeSelectors.getIsLike);
+
+    const toggleLike =
+        (isLike: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
+            setLikeState((prev) => !prev);
+            dispatch(setLike(like));
+            console.log(isLike);
+        };
+
+    const navigate = useNavigate();
+
+    const openModal = () => {
+        navigate(RoutesList.Modal);
     };
+    const handeBack = useCallback(() => {
+        navigate(RoutesList.Home);
+    }, []);
+
+    // const onPressLike = () => {
+    //     setCount((prevState) => !prevState);
+    //     if (count === false) {
+    //         setLike(like + 1);
+    //     } else {
+    //         setLike(like - 1);
+    //     }
+    // };
 
     return (
         <div className={classNames(PostType)}>
@@ -57,7 +80,7 @@ const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
                             {title}
                         </div>
                         {type === PostSize.Large && (
-                            <div className={styles.postText}>{text}</div>
+                            <div className={styles.postText}>{content}</div>
                         )}
                     </div>
                     <div className={styles.postImage}>
@@ -78,9 +101,9 @@ const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
                             className={classNames(styles.like, {
                                 [styles.darkLike]: themeValue === Theme.dark,
                             })}
-                            onClick={onPressLike}
+                            onClick={toggleLike(isLike)}
                         >
-                            {count === false ? (
+                            {isLike === false ? (
                                 <div
                                     className={classNames(styles.disLikeIcon, {
                                         [styles.darkDislikeIcon]: themeValue === Theme.dark,
@@ -97,7 +120,8 @@ const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
                                     <LikeIcon />
                                 </div>
                             )}
-                            <div className={styles.numLike}>{like}</div>
+                            {/* <div className={styles.numLike}>{like}</div> */}
+                            {/* <div className={styles.numLike}>{store.getState().counter}</div> */}
                         </div>
                     </div>
                     <div
@@ -109,6 +133,7 @@ const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
                             className={classNames(styles.save, {
                                 [styles.darkSave]: themeValue === Theme.dark,
                             })}
+                            // onClick={() => toggleToFavorites(card)}
                             onClick={() => { }}
                         >
                             <SaveIcon />
@@ -117,7 +142,7 @@ const Post: FC<PostProps> = ({ type, id, image, text, date, title }) => {
                             className={classNames(styles.more, {
                                 [styles.darkMore]: themeValue === Theme.dark,
                             })}
-                            onClick={() => { }}
+                            onClick={openModal}
                         >
                             <MoreIcon />
                         </div>

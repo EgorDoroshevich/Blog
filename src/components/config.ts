@@ -11,12 +11,13 @@ export enum PostSize {
   Large = "Large",
   Medium = "Medium",
   Small = "Small",
+  Modal = "Modal",
 }
 export type PostProps = {
   type: PostSize;
   id?: number;
   image: string;
-  text: string;
+  content: string;
   date: string;
   lessonNum?: number;
   title: string;
