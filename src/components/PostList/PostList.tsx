@@ -6,7 +6,7 @@ import { useThemeContext } from "../../context/Theme";
 import classNames from "classnames";
 import TabList from "../TabList";
 
-type CardList = {
+export type CardList = {
     cardList: PostsList;
 };
 

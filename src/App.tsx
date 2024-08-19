@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import { PostSize, Theme } from "./components/config";
@@ -6,6 +6,7 @@ import { ThemeProvider } from "./context/Theme";
 import AppRouter from "./components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeSelectors, setThemeValue } from "./redux/store/slices/themeSlice";
+import app from "./firebase";
 
 const data = [
   {
@@ -105,6 +106,22 @@ function App() {
   const onChangeTheme = (value: Theme) => () => {
     dispath(setThemeValue(value));
   };
+
+  // useEffect(() => {
+  //   // Создайте или обновите мета-тег CSRF
+  //   const meta = document.createElement('meta');
+  //   meta.name = "csrf-token";
+  //   meta.content = "{{ csrf_token }}"; // Или получите токен из источника данных
+  //   document.head.appendChild(meta);
+
+  //   // Очистите мета-тег при размонтировании компонента
+  //   return () => {
+  //     const existingMeta = document.querySelector('meta[name="csrf-token"]');
+  //     if (existingMeta) {
+  //       document.head.removeChild(existingMeta);
+  //     }
+  //   };
+  // }, []);
 
   return (
     <div>

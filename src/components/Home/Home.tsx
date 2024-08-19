@@ -1,13 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import Input from "../Input";
-import Button from "../Button";
-import { json } from "stream/consumers";
-import { ButtonSize } from "../Button/Button";
-import Header from "../Header";
 import { PostSize } from "../config";
 import PostList from "../PostList";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { getPosts } from "../../utils/api";
 const data = [
     {
         title:
@@ -17,6 +12,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Large,
+        like: true,
     },
     {
         title:
@@ -26,6 +22,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Medium,
+        like: true,
     },
     {
         title:
@@ -35,6 +32,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Medium,
+        like: true,
     },
     {
         title:
@@ -44,6 +42,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Medium,
+        like: false,
     },
     {
         title:
@@ -53,6 +52,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Medium,
+        like: false,
     },
     {
         title:
@@ -62,6 +62,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
     {
         title:
@@ -71,6 +72,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
     {
         title:
@@ -80,6 +82,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
     {
         title:
@@ -89,6 +92,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
     {
         title:
@@ -98,6 +102,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
     {
         title:
@@ -107,6 +112,7 @@ const data = [
             "Astronauts Kayla Barron and Raja Chari floated out of the International Space Station airlock for a spacewalk Tuesday, installing brackets and struts to support new solar arrays to upgrade the research lab’s power system on the same day that crewmate Mark Vande Hei marked his 341st day in orbit, a U.S. record for a single spaceflight.",
         image: require("../../images/polya.jpeg"),
         type: PostSize.Small,
+        like: false,
     },
 ];
 
@@ -117,11 +123,10 @@ const Home = () => {
     // useEffect(() => {
     //     const fetchPosts = async () => {
     //         try {
-    //             const response = await axios.get(
-    //                 "https://jsonplaceholder.typicode.com/posts"
-    //             );
-    //             setPosts(response.data);
-    //             console.log(response.data);
+    //             const response = await getPosts();
+    //             setPosts(response.data.results);
+    //             console.log(posts);
+    //             console.log(response.data.results);
     //         } catch (error) {
     //             setError(null);
     //         }
@@ -131,11 +136,7 @@ const Home = () => {
     // }, []);
 
     const navigate = useNavigate();
-    return (
-        <div>
-            <PostList cardList={data} />
-        </div>
-    );
+    return <div>{!error ? <PostList cardList={data} /> : null}</div>;
 };
 
 export default Home;

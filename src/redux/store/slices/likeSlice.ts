@@ -1,12 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { LikeStatus, PostsList } from "../../../components/config";
 
 type InitialState = {
-  isLike: boolean;
+  like: boolean;
+  favorite: PostsList;
 };
 
 const initialState: InitialState = {
-  isLike: false,
+  like: false,
+  favorite: [],
 };
 
 const likeSlice = createSlice({
@@ -14,15 +17,22 @@ const likeSlice = createSlice({
   initialState,
   reducers: {
     setLike: (state, action: PayloadAction<boolean>) => {
-      state.isLike = action.payload;
+      state.like = action.payload;
+    },
+    setFavoriteCard: (state, action: PayloadAction<{ card: PostsList }>) => {
+      const { card } = action.payload;
+      if (card.map((item) => item.like === true)) {
+      } else {
+      }
     },
   },
 });
 
-export const { setLike } = likeSlice.actions;
+export const { setLike, setFavoriteCard } = likeSlice.actions;
 
 export const LikeSelectors = {
-  getIsLike: (state: RootState) => state.likeReducer.isLike,
+  getIsLike: (state: RootState) => state.likeReducer.like,
+  getFavorite: (state: RootState) => state.likeReducer.favorite,
 };
 
 export default likeSlice.reducer;

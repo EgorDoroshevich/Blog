@@ -32,6 +32,11 @@ const AsideMenu = () => {
     const onNavigateToModal = () => {
         navigate(RoutesList.Modal);
     };
+
+    const onClickMyFavorites = () => {
+        navigate(RoutesList.MyFavorites);
+    };
+
     return (
         <div>
             <div
@@ -42,7 +47,7 @@ const AsideMenu = () => {
                 <div className={styles.name}></div>
                 <div className={styles.buttons}>
                     <div className={styles.asideMenuButtons}>
-                        <UserName name="Artem Martin" />
+                        {/* <UserName name="Artem Martin" /> */}
                         <Button
                             onClick={onClickHome}
                             title={"Home"}
@@ -70,7 +75,7 @@ const AsideMenu = () => {
                         />
                         <Button onClick={() => { }} title={"All"} type={ButtonSize.aside} />
                         <Button
-                            onClick={() => { }}
+                            onClick={onClickMyFavorites}
                             title={"MyFavorites"}
                             type={ButtonSize.aside}
                         />

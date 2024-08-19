@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Post from "../../components/Post";
-import { PostSize } from "../../components/config";
+import { LikeStatus, PostSize } from "../../components/config";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    LikeSelectors,
+    setFavoriteCard,
+} from "../../redux/store/slices/likeSlice";
 
 const MyFavorites = () => {
+    const dispatch = useDispatch();
+    const favorite = useSelector(LikeSelectors.getFavorite);
+
+    // const toggleLike = () => {
+    //     dispatch(setFavoriteCard())
+    // }
+
     return (
         <div>
-            <Post
-                title={" e"}
-                date={"asd"}
-                content={"asd"}
-                image={"asd"}
-                type={PostSize.Medium}
-            />
+            {favorite.map((item) => {
+                if (item.like === true) {
+                    return <Post {...item} />;
+                }
+            })}
         </div>
     );
 };

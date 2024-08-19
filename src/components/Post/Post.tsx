@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import styles from "./Post.module.scss";
-import { PostProps, PostSize, Theme } from "../config";
+import { LikeStatus, PostProps, PostSize, Theme } from "../config";
 import LikeIcon from "../../icons/LikeIcon/LikeIcon";
 import DislikeIcon from "../../icons/DislikeIcon/DislikeIcon";
 import SaveIcon from "../../icons/SaveIcon/SaveIcon";
@@ -10,24 +10,37 @@ import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
 import { useDispatch, useSelector } from "react-redux";
-import { LikeSelectors, setLike } from "../../redux/store/slices/likeSlice";
+import {
+    LikeSelectors,
+    setFavoriteCard,
+    setLike,
+} from "../../redux/store/slices/likeSlice";
 
-const Post: FC<PostProps> = ({ type, id, image, content, date, title }) => {
+const Post: FC<PostProps> = ({
+    type,
+    id,
+    like,
+    image,
+    content,
+    date,
+    title,
+}) => {
     const PostType = styles[type];
 
-    const [like, setLikeState] = useState<boolean>(true);
+    const [likeStatus, setLikeState] = useState<boolean>(false);
 
     const { themeValue } = useThemeContext();
 
     const dispatch = useDispatch();
 
     const isLike = useSelector(LikeSelectors.getIsLike);
+    const favorite = useSelector(LikeSelectors.getFavorite);
 
     const toggleLike =
-        (isLike: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
+        (like: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
             setLikeState((prev) => !prev);
-            dispatch(setLike(like));
-            console.log(isLike);
+            dispatch(setLike(likeStatus));
+            console.log(likeStatus);
         };
 
     const navigate = useNavigate();
@@ -38,15 +51,6 @@ const Post: FC<PostProps> = ({ type, id, image, content, date, title }) => {
     const handeBack = useCallback(() => {
         navigate(RoutesList.Home);
     }, []);
-
-    // const onPressLike = () => {
-    //     setCount((prevState) => !prevState);
-    //     if (count === false) {
-    //         setLike(like + 1);
-    //     } else {
-    //         setLike(like - 1);
-    //     }
-    // };
 
     return (
         <div className={classNames(PostType)}>
@@ -101,9 +105,10 @@ const Post: FC<PostProps> = ({ type, id, image, content, date, title }) => {
                             className={classNames(styles.like, {
                                 [styles.darkLike]: themeValue === Theme.dark,
                             })}
-                            onClick={toggleLike(isLike)}
+                            // onClick={toggleLike(isLike)}
+                            onClick={toggleLike(like)}
                         >
-                            {isLike === false ? (
+                            {likeStatus === false ? (
                                 <div
                                     className={classNames(styles.disLikeIcon, {
                                         [styles.darkDislikeIcon]: themeValue === Theme.dark,

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import styles from "./SignIn.module.scss";
 import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
@@ -9,18 +9,17 @@ import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {
     SignInSelectors,
     setEmail,
     setPassword,
 } from "../../redux/store/slices/signInSlice";
 
-const SignIn = () => {
-    const email = useSelector(SignInSelectors.getEmail);
-    const password = useSelector(SignInSelectors.getPassword);
-
+const SignIn = (email: any, password: any) => {
+    // const email = useSelector(SignInSelectors.getEmail);
+    // const password = useSelector(SignInSelectors.getPassword);
     const dispatch = useDispatch();
-
     const onChangeEmail = (value: string) => {
         dispatch(setEmail(value));
     };
@@ -35,6 +34,13 @@ const SignIn = () => {
     const onNavigateToSignUp = () => {
         navigate(RoutesList.SignUp);
     };
+    const [username, setUsername] = useState("");
+    const [pass, setPassword] = useState("");
+
+    // const auth = getAuth();
+    // signInWithEmailAndPassword(auth, email, password)
+    //     .then(console.log)
+    //     .catch(console.error);
 
     return (
         <div>
@@ -61,15 +67,15 @@ const SignIn = () => {
                 <Input
                     title={"Email"}
                     placeholder={"Your email"}
-                    onChange={onChangeEmail}
-                    value={email}
+                    onChange={() => { }}
+                    value={username}
                 />
                 <div>
                     <Input
                         title={"Password"}
                         placeholder={"Your password"}
                         onChange={onChangePassword}
-                        value={password}
+                        value={pass}
                     />
                     <div
                         className={classNames(styles.forgotPassword, {

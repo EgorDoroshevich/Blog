@@ -14,7 +14,7 @@ type FormPagesContainerProps = {
     title: string;
     children: ReactElement | ReactElement[];
     btnTitle: string;
-    onSubmit: (e: any) => void;
+    onSubmit: (_: any) => void;
     additionalInfo?: ReactElement;
 };
 

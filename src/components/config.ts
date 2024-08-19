@@ -5,6 +5,11 @@ export enum Theme {
   dark = "dark",
 }
 
+export enum LikeStatus {
+  like = "like",
+  dislike = "dislike",
+}
+
 export type Children = ReactElement | ReactElement[];
 
 export enum PostSize {
@@ -22,6 +27,7 @@ export type PostProps = {
   lessonNum?: number;
   title: string;
   author?: string;
+  like: boolean;
 };
 
 export type PostsList = PostProps[];

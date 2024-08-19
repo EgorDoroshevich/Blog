@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import styles from "./SignUp.module.scss";
-import FormPagesContainer from "../../components/FormPagesContainer";
-import Input from "../../components/Input";
-import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
+import { useDispatch, useSelector } from "react-redux";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import FormTest from "../FormTest";
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+};
+
+const app = initializeApp(firebaseConfig);
 
 const SignUp = () => {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+    const [mail, setEmail] = useState("");
     const [pass, setPass] = useState("");
-    const [confpass, setConfpass] = useState("");
+
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -18,19 +30,28 @@ const SignUp = () => {
         navigate(RoutesList.SignIn);
     };
 
-    const dataProp = { name, email, pass, confpass };
+    const data = { mail, pass };
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        setName('')
-        setEmail('')
-        setPass('')
-        setConfpass('')
+    const handleSubmit = async (email: string, password: string) => {
+        const auth = getAuth(app);
 
-    }
+        try {
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+            navigate(RoutesList.RegistrationConfirmation);
+            console.log("User created:", userCredential.user);
+        } catch (error) {
+            console.error("Error creating user:", error);
+        }
+    };
+
     return (
         <div className={styles.signUp}>
-            <div className={styles.signUpContainer}>
+            <FormTest handleSubmit={handleSubmit} title={"weljf"} />
+            {/* <div className={styles.signUpContainer}>
                 <FormPagesContainer
                     title={"Sign Up"}
                     btnTitle={"Sign Up"}
@@ -48,30 +69,38 @@ const SignUp = () => {
                         onChange={(e) => setName(name)}
                         title={"Name"}
                         placeholder={"Your name"}
-                        value={dataProp.name}
+                        value={name}
                     />
                     <Input
-                        onChange={() => { }}
+                        onChange={(e) => setEmail(mail)}
                         title={"Email"}
                         placeholder={"Your email"}
-                        value={dataProp.email}
+                        value={mail}
                     />
                     <Input
-                        onChange={() => { }}
+                        onChange={(e) => setPass(pass)}
                         title={"Password"}
                         placeholder={"Your password"}
-                        value={dataProp.pass}
+                        value={pass}
                     />
                     <Input
                         onChange={() => { }}
                         title={"Confirm password"}
                         placeholder={"Confirm password"}
-                        value={dataProp.confpass}
+                        value={"dataProp.confpass"}
                     />
                 </FormPagesContainer>
-            </div>
+            </div> */}
         </div>
     );
 };
+
+// const handleSubmit = (email: any, password: any) => {
+//     const auth = getAuth();
+//     console.log(auth)
+//     createUserWithEmailAndPassword(auth, email, password)
+//         .then(console.log)
+//         .catch(console.error);
+// };
 
 export default SignUp;

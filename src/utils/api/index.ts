@@ -1,4 +1,9 @@
 import axios from "axios";
-import { create } from "domain";
 
-const Post = axios.post("http://localhost:8000/api/posts/");
+const API = axios.create({
+  baseURL: "https://studapi.teachmeskills.by",
+});
+
+export const getPosts = () => {
+  return API.get("/blog/posts", {});
+};
