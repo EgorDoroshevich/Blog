@@ -14,7 +14,7 @@ type FormPagesContainerProps = {
     title: string;
     children: ReactElement | ReactElement[];
     btnTitle: string;
-    onSubmit: (_: any) => void;
+    onSubmit: any;
     additionalInfo?: ReactElement;
 };
 
@@ -31,19 +31,22 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
         navigate(RoutesList.Home);
     };
     return (
-        <div
+        <div className={styles.mainContainer}>
+            <form
             className={classNames(styles.container, {
                 [styles.darkContainer]: themeValue === Theme.dark,
             })}
         >
-            <div
+            {/* <div
                 onClick={onNavigateToHome}
                 className={classNames(styles.breadcrumbs, {
                     [styles.darkBreadcrumbs]: themeValue === Theme.dark,
                 })}
             >
                 Back to home
-            </div>
+            </div> 
+            Пока это не нужно, в дальнейшем либо удалить, либо оптимизировать!
+            */}
             <Title title={title} />
             <div
                 className={classNames(styles.formContainer, {
@@ -66,7 +69,9 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
                 </div>
                 <div>{additionalInfo}</div>
             </div>
+        </form>
         </div>
+        
     );
 };
 

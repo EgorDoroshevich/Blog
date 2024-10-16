@@ -1,5 +1,9 @@
 @import "src/styles/colors";
 
+.mainContainer {
+  height: 100vh;
+  background-color: $extra-light;
+}
 .container {
   padding-top: 20px;
   display: flex;
@@ -35,7 +39,7 @@
 .fieldsContainer {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
   flex: 1;
 }
 .button {

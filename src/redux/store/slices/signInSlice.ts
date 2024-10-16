@@ -2,36 +2,43 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 type InitialState = {
-  email: string;
-  password: string;
+  email: null;
+  token: null;
+  id: null;
 };
 
 const initialState: InitialState = {
-  email: "",
-  password: "",
+  email: null,
+  token: null,
+  id: null,
 };
 
 const signInSlice = createSlice({
   name: "Sign In",
   initialState,
   reducers: {
-    setEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
+    setUser: (state, action: PayloadAction<any>) => {
+      state.email = action.payload.email;
+      state.id = action.payload.id;
+      state.token = action.payload.token;
     },
-    setPassword: (state, action: PayloadAction<string>) => {
-      state.password = action.payload;
+    removeUser: (state) => {
+      state.email = null;
+      state.id = null;
+      state.token = null;
     },
   },
 });
 
-export const { setEmail, setPassword } = signInSlice.actions;
+export const { setUser } = signInSlice.actions;
 
 export const SignInSelectors = {
-  getEmail: (state: RootState) => {
-    return state.signInReducer.email;
-  },
-  getPassword: (state: RootState) => {
-    return state.signInReducer.password;
+  gerUser: (state: RootState) => {
+    return (
+      state.signInReducer.email,
+      state.signInReducer.token,
+      state.signInReducer.id
+    );
   },
 };
 

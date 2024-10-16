@@ -2,8 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { PostSize } from "../config";
 import PostList from "../PostList";
 import { useNavigate } from "react-router-dom";
-import { getPosts } from "../../utils/api";
-const data = [
+import Header from "../Header";
+import { AppBar } from "@mui/material";
+const dataHard = [
     {
         title:
             "Astronauts prep for new solar arrays on nearly seven-hour spacewalk",
@@ -120,23 +121,31 @@ const Home = () => {
     const [posts, setPosts] = useState([]);
     const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const fetchPosts = async () => {
-    //         try {
-    //             const response = await getPosts();
-    //             setPosts(response.data.results);
-    //             console.log(posts);
-    //             console.log(response.data.results);
-    //         } catch (error) {
-    //             setError(null);
-    //         }
-    //     };
-
-    //     fetchPosts();
-    // }, []);
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const data = await fetch(
+                    "https://myth-p-default-rtdb.firebaseio.com/posts.json"
+                ).then(function (response) {
+                    response.json().then(function (data) {
+                        console.log("data", data);
+                    });
+                });
+                console.log(data);
+            } catch (error) {
+                setError(null);
+            }
+        };
+    }, []);
 
     const navigate = useNavigate();
-    return <div>{!error ? <PostList cardList={data} /> : null}</div>;
+    return (
+        <div>
+            <Header />
+
+            {!error ? <PostList cardList={dataHard} /> : null}
+        </div>
+    );
 };
 
 export default Home;

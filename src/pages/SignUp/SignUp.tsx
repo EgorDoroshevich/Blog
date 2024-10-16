@@ -1,11 +1,11 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SignUp.module.scss";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import FormTest from "../FormTest";
 import { initializeApp } from "firebase/app";
+import FormPagesContainer from "../../components/FormPagesContainer";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -19,10 +19,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const SignUp = () => {
-    const [mail, setEmail] = useState("");
-    const [pass, setPass] = useState("");
-
-    const dispatch = useDispatch();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confpassword, setConfpassword] = useState("");
 
     const navigate = useNavigate();
 
@@ -30,28 +30,30 @@ const SignUp = () => {
         navigate(RoutesList.SignIn);
     };
 
-    const data = { mail, pass };
-
-    const handleSubmit = async (email: string, password: string) => {
+    const handleSubmit = async () => {
         const auth = getAuth(app);
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-            navigate(RoutesList.RegistrationConfirmation);
-            console.log("User created:", userCredential.user);
-        } catch (error) {
-            console.error("Error creating user:", error);
+        if (password !== confpassword) {
+            alert("пароли не совпадают");
+        } else if (password === "") {
+            alert("введите пароль");
+        } else {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+                navigate(RoutesList.RegistrationConfirmation);
+                console.log("User created:", userCredential.user);
+            } catch (error) {
+                console.error("Error creating user:", error);
+            }
         }
     };
 
     return (
         <div className={styles.signUp}>
-            <FormTest handleSubmit={handleSubmit} title={"weljf"} />
-            {/* <div className={styles.signUpContainer}>
+            <div className={styles.signUpContainer}>
                 <FormPagesContainer
                     title={"Sign Up"}
                     btnTitle={"Sign Up"}
@@ -65,42 +67,53 @@ const SignUp = () => {
                         </div>
                     }
                 >
-                    <Input
-                        onChange={(e) => setName(name)}
+                    <label className={styles.labelEmail}>Name</label>
+                    <input
+                        name="login"
+                        onChange={(e: any) => setName(e.target.value)}
                         title={"Name"}
-                        placeholder={"Your name"}
+                        placeholder={"Enter your name"}
                         value={name}
+                        type="text"
+                        className={styles.email}
                     />
-                    <Input
-                        onChange={(e) => setEmail(mail)}
+                    <p></p>
+                    <label className={styles.labelEmail}>Email</label>
+                    <input
+                        name="email"
+                        onChange={(e: any) => setEmail(e.target.value)}
                         title={"Email"}
-                        placeholder={"Your email"}
-                        value={mail}
+                        placeholder={"Enter your email"}
+                        value={email}
+                        type="email"
+                        className={styles.email}
                     />
-                    <Input
-                        onChange={(e) => setPass(pass)}
+                    <p></p>
+                    <label className={styles.labelPass}>Password</label>
+                    <input
+                        name="password"
+                        onChange={(e: any) => setPassword(e.target.value)}
                         title={"Password"}
-                        placeholder={"Your password"}
-                        value={pass}
+                        placeholder={"Enter your password"}
+                        value={password}
+                        type="password"
+                        className={styles.password}
                     />
-                    <Input
-                        onChange={() => { }}
+                    <p></p>
+                    <label className={styles.lableConf}>Confirm password</label>
+                    <input
+                        onChange={(e: any) => setConfpassword(e.target.value)}
                         title={"Confirm password"}
                         placeholder={"Confirm password"}
-                        value={"dataProp.confpass"}
+                        value={confpassword}
+                        type="password"
+                        className={styles.confpassword}
                     />
+                    <p></p>
                 </FormPagesContainer>
-            </div> */}
+            </div>
         </div>
     );
 };
-
-// const handleSubmit = (email: any, password: any) => {
-//     const auth = getAuth();
-//     console.log(auth)
-//     createUserWithEmailAndPassword(auth, email, password)
-//         .then(console.log)
-//         .catch(console.error);
-// };
 
 export default SignUp;

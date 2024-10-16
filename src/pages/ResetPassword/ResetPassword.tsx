@@ -30,6 +30,7 @@ const ResetPassword = () => {
                         onChange={() => { }}
                         title={"Email"}
                         placeholder={"exemple@gmail.com"}
+                        type="email"
                     />
                 </FormPagesContainer>
             </div>

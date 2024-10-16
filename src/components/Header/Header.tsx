@@ -11,10 +11,16 @@ import AsideMenu from "../AsideMenu";
 import Search from "../Search";
 import UserName from "../UserName";
 
+import app from "../../firebase";
+import { getAuth } from "firebase/auth";
+
 const Header = () => {
     const [burger, setBurger] = useState<boolean>(true);
     const [search, setSearch] = useState<boolean>(true);
-    const [isLog, setIsLog] = useState<boolean>(false);
+    const [isLog, setIsLog] = useState<boolean>(true);
+
+    const auth = getAuth(app);
+    console.log(auth);
 
     const onClickBurger = () => {
         setBurger((prevState) => !prevState);
@@ -44,14 +50,14 @@ const Header = () => {
                                 onClick={onSearch}
                             />
                         )}
-                        {!isLog ? (
+                        {!auth ? (
                             <Button
                                 type={ButtonSize.headerButton}
                                 title={<ProfileIcon />}
                                 onClick={() => { }}
                             />
                         ) : (
-                            <UserName name="Artem Martin" />
+                            <UserName email={auth.currentUser?.email} />
                         )}
                     </div>
                 </div>

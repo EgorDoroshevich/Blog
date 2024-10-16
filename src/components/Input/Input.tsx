@@ -11,14 +11,9 @@ type InputProps = {
   onChange: (value: string) => void;
   disablead?: boolean;
   className?: string;
+  type: string;
 };
-const Input = ({
-  placeholder,
-  title,
-  onChange,
-  value,
-  disablead,
-}: InputProps) => {
+const Input = ({ placeholder, title, onChange, value, type }: InputProps) => {
   const { themeValue } = useThemeContext();
 
   const [text, setText] = useState("");
@@ -27,19 +22,18 @@ const Input = ({
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setText(event.target.value);
-    if (onChange) {
-      onChange(event.target.value);
-    }
+    console.log(text);
   };
 
   const inputProps = {
     onChange: onInputChange,
     value: text,
     placeholder,
+    type,
   };
   return (
     <div>
-      {!disablead ? (
+      {
         <div>
           <div
             className={classNames(styles.title, {
@@ -55,23 +49,7 @@ const Input = ({
             {...inputProps}
           />
         </div>
-      ) : (
-        <div>
-          <div
-            className={classNames(styles.title, {
-              [styles.darkTitle]: themeValue === Theme.dark,
-            })}
-          >
-            {title}
-          </div>
-          <input
-            className={classNames(styles.disablead, {
-              [styles.darkDisabled]: themeValue === Theme.dark,
-            })}
-            {...inputProps}
-          />
-        </div>
-      )}
+      }
     </div>
   );
 };

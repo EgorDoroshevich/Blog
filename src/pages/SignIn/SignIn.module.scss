@@ -36,3 +36,37 @@
 .darkAdditionalInfo {
   color: #fff;
 }
+
+.email {
+  width: 544px;
+  line-height: 20px;
+  font-size: 16px;
+  border: 1px solid #8d8e97;
+  border-radius: 2px;
+  padding: 10px;
+  font-weight: 400;
+  color: #bdbfca;
+  background-color: #fff;
+}
+.labelEmail {
+  font-weight: 700;
+  font-size: 20px;
+  color: #757576;
+}
+.password {
+  width: 544px;
+  line-height: 20px;
+  font-size: 16px;
+  border: 1px solid #8d8e97;
+  border-radius: 2px;
+  padding: 10px;
+  font-weight: 400;
+  color: #bdbfca;
+  background-color: #fff;
+}
+.labelPass {
+  margin: 20px 0;
+  font-weight: 700;
+  font-size: 20px;
+  color: #757576;
+}

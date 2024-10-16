@@ -1,11 +1,11 @@
 .container {
   background-color: #cbc9c9;
-  height: 640px;
   position: absolute;
   left: 0;
   top: 84px;
   .buttons {
-    height: 640px;
+    position: absolute;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

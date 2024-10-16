@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header";
 import Home from "../Home";
 import SignIn from "../../pages/SignIn";
@@ -14,19 +14,20 @@ export enum RoutesList {
     SignUp = "/sign-up",
     SignIn = "/sign-in",
     RegistrationConfirmation = "/sign-up/confirm",
-    AddPost = "AddPost",
+    AddPost = "/AddPost",
     Default = "*",
     Modal = "modal",
     MyFavorites = "myfavorites",
 }
 
 const AppRouter = () => {
+    // const [user, setUser] = useState<boolean>(false);
+
     return (
         <div>
-            <Header />
             <Routes>
                 <Route path={RoutesList.Home} element={<Home />} />
-                <Route path={RoutesList.SignIn} element={<SignIn />} />
+                <Route path={RoutesList.Default} element={<SignIn />} />
                 <Route path={RoutesList.SignUp} element={<SignUp />} />
                 <Route
                     path={RoutesList.RegistrationConfirmation}
@@ -36,6 +37,8 @@ const AppRouter = () => {
                 <Route path={RoutesList.Default} element={<MyFavorites />} />
                 <Route path={RoutesList.MyFavorites} element={<MyFavorites />} />
             </Routes>
+
+            {/* <Header /> */}
         </div>
     );
 };

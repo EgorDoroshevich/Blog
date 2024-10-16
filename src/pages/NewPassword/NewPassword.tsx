@@ -17,13 +17,16 @@ const NewPassword = () => {
                         onChange={() => { }}
                         placeholder={"Your password"}
                         title={"Password"}
+                        type="password"
                     />
                     <Input
                         onChange={() => { }}
                         placeholder={"Confirm password"}
                         title={"Confirm password"}
+                        type="password"
                     />
-                </FormPagesContainer></div>
+                </FormPagesContainer>
+            </div>
         </div>
     );
 };

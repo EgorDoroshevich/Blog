@@ -1,3 +1,7 @@
+.addpost {
+  height: 100vh;
+  background-color: #f3f3f3;
+}
 .container {
   display: flex;
   padding: 40px 0;
@@ -9,8 +13,6 @@
     width: 600px;
     color: #313037;
     text-align: center;
-    // margin: auto;
-
     &:hover {
       color: #5360cd;
       cursor: pointer;

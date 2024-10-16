@@ -10,9 +10,13 @@ import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
 import UserName from "../UserName";
+import { useDispatch } from "react-redux";
+import { removeUser } from "../../redux/store/slices/userSlice";
 
 const AsideMenu = () => {
     const { themeValue, onChangeTheme } = useThemeContext();
+
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
@@ -37,17 +41,20 @@ const AsideMenu = () => {
         navigate(RoutesList.MyFavorites);
     };
 
+    const onClickLogOut = () => {
+        dispatch(removeUser())
+        navigate(RoutesList.SignIn);
+    };
+
     return (
-        <div>
+        <div className={styles.asideMenu}>
             <div
                 className={classNames(styles.container, {
                     [styles.darkContainer]: themeValue === Theme.dark,
                 })}
             >
-                <div className={styles.name}></div>
                 <div className={styles.buttons}>
                     <div className={styles.asideMenuButtons}>
-                        {/* <UserName name="Artem Martin" /> */}
                         <Button
                             onClick={onClickHome}
                             title={"Home"}
@@ -61,16 +68,6 @@ const AsideMenu = () => {
                         <Button
                             onClick={onNavigateToAddPost}
                             title={"Add Post"}
-                            type={ButtonSize.aside}
-                        />
-                        <Button
-                            onClick={onNavigateToSignIn}
-                            title={"Sign In"}
-                            type={ButtonSize.aside}
-                        />
-                        <Button
-                            onClick={onNavigateToSignUp}
-                            title={"Sign Up"}
                             type={ButtonSize.aside}
                         />
                         <Button onClick={() => { }} title={"All"} type={ButtonSize.aside} />
@@ -112,7 +109,7 @@ const AsideMenu = () => {
                         </div>
                         <div className={styles.logout}>
                             <Button
-                                onClick={() => { }}
+                                onClick={onClickLogOut}
                                 title={"Log Out"}
                                 type={ButtonSize.aside}
                             />

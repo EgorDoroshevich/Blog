@@ -10,22 +10,11 @@ import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {
-    SignInSelectors,
-    setEmail,
-    setPassword,
-} from "../../redux/store/slices/signInSlice";
+import { SignInSelectors, setUser } from "../../redux/store/slices/signInSlice";
+import AppBar from "../../components/AppBar";
 
-const SignIn = (email: any, password: any) => {
-    // const email = useSelector(SignInSelectors.getEmail);
-    // const password = useSelector(SignInSelectors.getPassword);
+const SignIn = () => {
     const dispatch = useDispatch();
-    const onChangeEmail = (value: string) => {
-        dispatch(setEmail(value));
-    };
-    const onChangePassword = (value: string) => {
-        setPassword(value);
-    };
 
     const { themeValue } = useThemeContext();
 
@@ -34,20 +23,34 @@ const SignIn = (email: any, password: any) => {
     const onNavigateToSignUp = () => {
         navigate(RoutesList.SignUp);
     };
-    const [username, setUsername] = useState("");
-    const [pass, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    // const auth = getAuth();
-    // signInWithEmailAndPassword(auth, email, password)
-    //     .then(console.log)
-    //     .catch(console.error);
+    const onChangeSignIn = (e: React.FormEvent) => {
+        e.preventDefault();
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then(({ user }) => {
+                dispatch(
+                    setUser({
+                        email: user.email,
+                        id: user.uid,
+                        token: user.refreshToken,
+                    })
+                );
+                console.log(user);
+                navigate(RoutesList.Home);
+            })
+            .catch(() => alert("Invalid user"));
+    };
 
     return (
-        <div>
+        <div className={styles.container}>
+            {/* <AppBar /> */}
             <FormPagesContainer
                 title={"Sign In"}
                 btnTitle={"Sign In"}
-                onSubmit={() => { }}
+                onSubmit={onChangeSignIn}
                 additionalInfo={
                     <div
                         className={classNames(styles.additionalInfo, {
@@ -64,18 +67,24 @@ const SignIn = (email: any, password: any) => {
                     </div>
                 }
             >
-                <Input
+                <label className={styles.labelEmail}>Email</label>
+                <input
                     title={"Email"}
                     placeholder={"Your email"}
-                    onChange={() => { }}
-                    value={username}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    type="email"
+                    className={styles.email}
                 />
                 <div>
-                    <Input
+                    <label className={styles.labelPass}>Password</label>
+                    <input
                         title={"Password"}
                         placeholder={"Your password"}
-                        onChange={onChangePassword}
-                        value={pass}
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}
+                        type="password"
+                        className={styles.password}
                     />
                     <div
                         className={classNames(styles.forgotPassword, {
