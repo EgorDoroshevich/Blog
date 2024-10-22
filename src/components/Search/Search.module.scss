@@ -1,15 +1,23 @@
 @import "src/styles/colors";
 
 .search {
-  display: flex;
+  .inputSearch {
+    width: 100%;
+    color: #064b66;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    background-color: #b1c5d3;
+    font-family: "PTSerif";
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 200;
+  }
 }
-.inputSearch {
-  color: $secondary;
-  padding: 10px;
-  width: 1000px;
-  background-color: $primary-secondary;
-  font-size: 20px;
-  line-height: 40px;
-  font-weight: 200;
-  margin: 10px 40px;
+.darkSearch {
+  background-color: #272121;
+  .darkInputSearch {
+    background-color: rgba(128, 59, 59, 0.5);
+    color: #fff;
+  }
 }

@@ -20,15 +20,13 @@ const AddPost = () => {
     };
 
     const [title, setTitle] = useState("");
-    const [lessonNumber, setLessonNumber] = useState("");
     const [image, setImage] = useState("");
-    const [description, setDescription] = useState("");
     const [text, setText] = useState("");
 
     // https://myth-p-default-rtdb.firebaseio.com/  firebase data
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        const postData = { title, lessonNumber, image, description, text };
+        const postData = { title, image, text };
         try {
             const response = await fetch(
                 "https://myth-p-default-rtdb.firebaseio.com/posts.json",
@@ -90,13 +88,6 @@ const AddPost = () => {
                         })}
                     >
                         <Input
-                            value={lessonNumber}
-                            placeholder={"lesson"}
-                            title={"lesson number"}
-                            onChange={(value: string) => setLessonNumber(value)}
-                            type="text"
-                        />
-                        <Input
                             value={image}
                             placeholder={"image"}
                             title={"Image"}
@@ -108,14 +99,7 @@ const AddPost = () => {
                         className={classNames(styles.description, {
                             [styles.darkDescription]: themeValue === Theme.dark,
                         })}
-                    >
-                        <Textarea
-                            title={"Description"}
-                            onChange={(value: string) => setDescription(value)}
-                            value={description}
-                            placeholder=""
-                        />
-                    </div>
+                    ></div>
                     <div
                         className={classNames(styles.text, {
                             [styles.darkText]: themeValue === Theme.dark,

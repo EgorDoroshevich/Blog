@@ -1,14 +1,42 @@
-.container {
-  max-width: 1920px;
-  height: 84px;
-  background-color: #2231aa;
-  .headerButton {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .rightButton {
+.header {
+  background-color: #c6d7e3;
+  border: 1px solid rgba(6, 75, 102, 0.3);
+  .container {
+    max-width: 1920px;
+    height: 64px;
+    background-color: #c6d7e3;
+    .headerButton {
+      height: 64px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      .burger {
+        border-right: 1px solid rgba(6, 75, 102, 0.3);
+      }
+      .search {
+        margin: 0px 20px;
+        flex: 1;
+      }
+    }
+  }
+}
+
+.darkHeader {
+  background-color: #272121;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  .darkContainer {
+    background-color: #272121;
+    .darkHeaderButton {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .burger {
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+        svg > path {
+          fill: #803b3b;
+        }
+      }
     }
   }
 }

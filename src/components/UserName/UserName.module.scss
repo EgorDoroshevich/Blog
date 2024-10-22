@@ -1,14 +1,27 @@
 .container {
-  width: 235px;
+  width: 150px;
   display: flex;
   align-items: center;
-  background-color: #5360cd;
-  height: 84px;
+  justify-content: center;
+  border-left: 1px solid rgba(6, 75, 102, 0.3);
+  margin: 0px 0px 0px 10px;
+  background-color: #c6d7e3;
+  height: 64px;
   .name {
-    width: 235px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #064b66;
+    font-family: "PTSerif";
+    font-size: 16px;
+    font-weight: 200;
+  }
+}
+.darkContainer {
+  background-color: #272121;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  .darkName {
     color: #fff;
   }
 }

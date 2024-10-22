@@ -13,11 +13,12 @@ import UserName from "../UserName";
 
 import app from "../../firebase";
 import { getAuth } from "firebase/auth";
+import { Theme } from "../config";
+import classNames from "classnames";
 
 const Header = () => {
     const [burger, setBurger] = useState<boolean>(true);
-    const [search, setSearch] = useState<boolean>(true);
-    const [isLog, setIsLog] = useState<boolean>(true);
+    // const [search, setSearch] = useState<boolean>(true);
 
     const auth = getAuth(app);
     console.log(auth);
@@ -26,39 +27,53 @@ const Header = () => {
         setBurger((prevState) => !prevState);
     };
 
-    const onSearch = () => {
-        setSearch((prevState) => !prevState);
-    };
+    // const onSearch = () => {
+    //     setSearch((prevState) => !prevState);
+    // };
 
     const { themeValue } = useThemeContext();
     return (
-        <div>
-            <div className={styles.container}>
-                <div className={styles.headerButton}>
-                    <Button
-                        type={ButtonSize.headerButton}
-                        title={burger === true ? <BurgerIcon /> : <CloseIcon />}
-                        onClick={onClickBurger}
-                    />
-                    <div className={styles.rightButton}>
-                        {search === false ? (
-                            <Search onClick={onSearch} />
-                        ) : (
-                            <Button
-                                type={ButtonSize.headerButton}
-                                title={<SearchIcon />}
-                                onClick={onSearch}
-                            />
-                        )}
-                        {!auth ? (
-                            <Button
-                                type={ButtonSize.headerButton}
-                                title={<ProfileIcon />}
-                                onClick={() => { }}
-                            />
-                        ) : (
-                            <UserName email={auth.currentUser?.email} />
-                        )}
+        <div
+            className={classNames(styles.header, {
+                [styles.darkHeader]: themeValue === Theme.dark,
+            })}
+        >
+            <div
+                className={classNames(styles.container, {
+                    [styles.darkContainer]: themeValue === Theme.dark,
+                })}
+            >
+                <div
+                    className={classNames(styles.headerButton, {
+                        [styles.darkHeaderButton]: themeValue === Theme.dark,
+                    })}
+                >
+                    <div
+                        className={classNames(styles.burger, {
+                            [styles.darkBurger]: themeValue === Theme.dark,
+                        })}
+                    >
+                        <Button
+                            type={themeValue === Theme.light
+                                ? ButtonSize.headerButton
+                                : ButtonSize.darkHeaderButton}
+                            title={burger === true ? <BurgerIcon /> : <CloseIcon />}
+                            onClick={onClickBurger}
+                        />
+                    </div>
+                    <div
+                        className={classNames(styles.search, {
+                            [styles.darkSearch]: themeValue === Theme.dark,
+                        })}
+                    >
+                        <Search onClick={() => { }} />
+                    </div>
+                    <div
+                        className={classNames(styles.username, {
+                            [styles.darkUsername]: themeValue === Theme.dark,
+                        })}
+                    >
+                        <UserName email={"asd"} />
                     </div>
                 </div>
             </div>

@@ -1,9 +1,8 @@
-.Large {
+.card {
   .postContainer {
-    width: 736px;
     border-bottom: 1px solid #dadada;
+    padding: 10px;
     .postHead {
-      width: 736px;
       display: flex;
       justify-content: space-between;
       .postText {
@@ -91,204 +90,7 @@
     }
   }
 }
-.Medium {
-  .postContainer {
-    width: 352px;
-    height: 452px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    border-bottom: 1px solid #dadada;
-    .postHead {
-      width: 352px;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column-reverse;
-      .postText {
-        width: 352px;
-        .postDate {
-          width: 200px;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 24px;
-          color: #8d8e97;
-        }
-        .postTitle {
-          font-weight: 700;
-          font-size: 18px;
-          line-height: 28px;
-          color: #313037;
-        }
 
-        .postText {
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 28px;
-          color: #8d8e97;
-        }
-      }
-      .postImage {
-        width: 352px;
-        height: 246px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-      }
-    }
-    .postButton {
-      width: 352px;
-      height: 25px;
-      gap: 40px;
-      margin-bottom: 40px;
-      display: flex;
-      justify-content: space-between;
-      .buttonLike {
-        width: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .like {
-          margin: 0 5px;
-          width: 40px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        .disLikeIcon {
-          color: #313037;
-          svg > path {
-            fill: transparent;
-          }
-        }
-      }
-      .buttonInfo {
-        width: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .save {
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        .more {
-          margin: 0 15px;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
-}
-.Small {
-  .postContainer {
-    width: 352px;
-    height: 206px;
-    border-bottom: 1px solid #dadada;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .postHead {
-      width: 352px;
-      display: flex;
-      justify-content: space-between;
-      .postText {
-        width: 222px;
-        .postDate {
-          width: 104px;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 24px;
-          color: #8d8e97;
-        }
-        .postTitle {
-          font-weight: 600;
-          font-size: 18px;
-          line-height: 28px;
-          color: #313037;
-        }
-        .postText {
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 28px;
-          color: #8d8e97;
-        }
-      }
-      .postImage {
-        width: 96px;
-        height: 96px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-        }
-      }
-    }
-    .postButton {
-      width: 352px;
-      height: 25px;
-      gap: 40px;
-      margin-bottom: 30px;
-      display: flex;
-      justify-content: space-between;
-      .buttonLike {
-        width: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .like {
-          margin: 0 5px;
-          width: 40px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        .disLikeIcon {
-          color: #313037;
-          svg > path {
-            fill: transparent;
-          }
-        }
-      }
-      .buttonInfo {
-        width: 80px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .save {
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        .more {
-          margin: 0 15px;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
-}
 .Modal {
   .postContainer {
     width: 1170px;
@@ -386,52 +188,11 @@
     }
   }
 }
-
-.darkPostContainer {
-  background-color: #313037;
-  border-bottom: 1px solid #dadada;
-}
-.darkPostDate {
-  color: #8d8e97;
-}
-
-.darkLike {
-  color: #ffffff;
-}
-
-.darkSave {
-  color: #ffffff;
-  svg > path {
-    fill: #ffffff;
-  }
-}
-.darkMore {
-  margin: 0 15px;
-  color: #ffffff;
-  svg > path {
-    fill: #ffffff;
-  }
-}
-
-.darkPostTitle {
-  color: #fff;
-}
-.darkLikeIcon {
-  color: #fff;
-  svg > path {
-    fill: #fff;
-  }
-}
-.darkDisLikeIcon {
-  color: #313037;
-  svg > path {
-    fill: #313037;
-  }
-}
-
 .postImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+.darkCard {
 }

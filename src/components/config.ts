@@ -13,18 +13,15 @@ export enum LikeStatus {
 export type Children = ReactElement | ReactElement[];
 
 export enum PostSize {
-  Large = "Large",
-  Medium = "Medium",
-  Small = "Small",
-  Modal = "Modal",
+  card = "card",
+  modal = "modal",
 }
 export type PostProps = {
   type: PostSize;
   id?: number;
   image: string;
-  content: string;
+  text: string;
   date: string;
-  lessonNum?: number;
   title: string;
   author?: string;
   like: boolean;

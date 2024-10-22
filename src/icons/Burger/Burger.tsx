@@ -1,6 +1,6 @@
 import React from "react";
 
-const BurgerIcon = ({ width = "24", height = "24", fill = "#fff" }) => {
+const BurgerIcon = ({ width = "24", height = "24", fill = "#7aa2bc" }) => {
     return (
         <div>
             <svg

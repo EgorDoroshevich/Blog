@@ -16,35 +16,20 @@ import {
     setLike,
 } from "../../redux/store/slices/likeSlice";
 
-const Post: FC<PostProps> = ({
-    type,
-    id,
-    like,
-    image,
-    content,
-    date,
-    title,
-}) => {
+const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
     const PostType = styles[type];
-
     const [likeStatus, setLikeState] = useState<boolean>(false);
-
     const { themeValue } = useThemeContext();
-
     const dispatch = useDispatch();
-
     const isLike = useSelector(LikeSelectors.getIsLike);
     const favorite = useSelector(LikeSelectors.getFavorite);
-
     const toggleLike =
         (like: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
             setLikeState((prev) => !prev);
             dispatch(setLike(likeStatus));
             console.log(likeStatus);
         };
-
     const navigate = useNavigate();
-
     const openModal = () => {
         navigate(RoutesList.Modal);
     };
@@ -53,7 +38,11 @@ const Post: FC<PostProps> = ({
     }, []);
 
     return (
-        <div className={classNames(PostType)}>
+        <div
+            className={classNames(PostType, {
+                [styles.darkCard]: themeValue === Theme.dark,
+            })}
+        >
             <div
                 className={classNames(styles.postContainer, {
                     [styles.darkPostContainer]: themeValue === Theme.dark,
@@ -83,9 +72,8 @@ const Post: FC<PostProps> = ({
                         >
                             {title}
                         </div>
-                        {type === PostSize.Large && (
-                            <div className={styles.postText}>{content}</div>
-                        )}
+
+                        <div className={styles.postText}>{text}</div>
                     </div>
                     <div className={styles.postImage}>
                         <img src={image} alt="imagePost" />
@@ -125,8 +113,6 @@ const Post: FC<PostProps> = ({
                                     <LikeIcon />
                                 </div>
                             )}
-                            {/* <div className={styles.numLike}>{like}</div> */}
-                            {/* <div className={styles.numLike}>{store.getState().counter}</div> */}
                         </div>
                     </div>
                     <div
@@ -138,7 +124,6 @@ const Post: FC<PostProps> = ({
                             className={classNames(styles.save, {
                                 [styles.darkSave]: themeValue === Theme.dark,
                             })}
-                            // onClick={() => toggleToFavorites(card)}
                             onClick={() => { }}
                         >
                             <SaveIcon />

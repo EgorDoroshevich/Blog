@@ -6,11 +6,17 @@ export enum ButtonSize {
     small = "small",
     middle = "middle",
     large = "large",
+    largeDark = "largeDark",
     headerButton = "headerButton",
+    darkHeaderButton = "darkHeaderButton",
     delete = "delete",
     cancel = "cancel",
     aside = 'aside',
-    themeButton = 'themeButton'
+    darkAside= 'darkAside',
+    themeButton = 'themeButton',
+    google = 'google',
+    googleDark = 'googleDark',
+
 }
 type ButtonProps = {
     type: ButtonSize;

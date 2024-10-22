@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, ReactElement, useState } from "react";
 import styles from "./Search.module.scss";
 import Input from "../Input";
 import classNames from "classnames";
@@ -15,17 +15,14 @@ const Search: FC<SearchProps> = ({ onClick }) => {
     const { themeValue } = useThemeContext();
 
     return (
-        <div className={styles.search}>
+        <div className={classNames(styles.search, {
+            [styles.darkSearch]: themeValue === Theme.dark
+        })}>
             <input
                 className={classNames(styles.inputSearch, {
                     [styles.darkInputSearch]: themeValue === Theme.dark,
                 })}
-                placeholder={""}
-            />
-            <Button
-                type={ButtonSize.headerButton}
-                title={<CloseIcon />}
-                onClick={onClick}
+                placeholder={"Search ..."}
             />
         </div>
     );

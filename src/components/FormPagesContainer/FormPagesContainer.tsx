@@ -33,45 +33,36 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
     return (
         <div className={styles.mainContainer}>
             <form
-            className={classNames(styles.container, {
-                [styles.darkContainer]: themeValue === Theme.dark,
-            })}
-        >
-            {/* <div
-                onClick={onNavigateToHome}
-                className={classNames(styles.breadcrumbs, {
-                    [styles.darkBreadcrumbs]: themeValue === Theme.dark,
+                className={classNames(styles.container, {
+                    [styles.darkContainer]: themeValue === Theme.dark,
                 })}
             >
-                Back to home
-            </div> 
-            Пока это не нужно, в дальнейшем либо удалить, либо оптимизировать!
-            */}
-            <Title title={title} />
-            <div
-                className={classNames(styles.formContainer, {
-                    [styles.darkFormContainer]: themeValue === Theme.dark,
-                })}
-            >
+
+                <Title title={title} />
                 <div
-                    className={classNames(styles.fieldsContainer, {
-                        [styles.darkFieldsContainer]: themeValue === Theme.dark,
+                    className={classNames(styles.formContainer, {
+                        [styles.darkFormContainer]: themeValue === Theme.dark,
                     })}
                 >
-                    {children}
+                    <div
+                        className={classNames(styles.fieldsContainer, {
+                            [styles.darkFieldsContainer]: themeValue === Theme.dark,
+                        })}
+                    >
+                        {children}
+                    </div>
+                    <div
+                        className={classNames(styles.button, {
+                            [styles.darkButton]: themeValue === Theme.dark,
+                        })}
+                    >
+                        <Button type={ButtonSize.large} title={btnTitle} onClick={onSubmit} />
+                    </div>
+                    <div>{additionalInfo}</div>
                 </div>
-                <div
-                    className={classNames(styles.button, {
-                        [styles.darkButton]: themeValue === Theme.dark,
-                    })}
-                >
-                    <Button type={ButtonSize.large} title={btnTitle} onClick={onSubmit} />
-                </div>
-                <div>{additionalInfo}</div>
-            </div>
-        </form>
+            </form>
         </div>
-        
+
     );
 };
 

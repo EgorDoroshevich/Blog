@@ -83,3 +83,10 @@ ul li {
 img {
   vertical-align: top;
 }
+@font-face {
+  font-family: PTSerif;
+  src: url(../public/fonts/PTSerif-Regular.ttf);
+}
+/* .PTSerif{
+  font-family: PTSerif;
+} */
