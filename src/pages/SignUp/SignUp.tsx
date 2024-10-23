@@ -3,7 +3,11 @@ import styles from "./SignUp.module.scss";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
 import { ButtonSize } from "../../components/Button/Button";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    getAuth,
+    updateProfile,
+} from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { Theme } from "../../components/config";
 import classNames from "classnames";
@@ -50,6 +54,27 @@ const SignUp = () => {
                     email,
                     password
                 );
+                if (userCredential.user) {
+                    await updateProfile(userCredential.user, {
+                        displayName: name,
+                    });
+                    console.log(name);
+                    const response = await fetch(
+                        "https://myth-p-default-rtdb.firebaseio.com/name.json",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(name),
+                        }
+                    );
+                    // if (response.ok) {
+                    //     navigate(RoutesList.Home);
+                    // } else {
+                    //     console.error("Failed to submit post");
+                    // }
+                }
                 navigate(RoutesList.RegistrationConfirmation);
                 console.log("User created:", userCredential.user);
             } catch (error) {

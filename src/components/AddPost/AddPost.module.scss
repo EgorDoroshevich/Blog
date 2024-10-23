@@ -1,6 +1,6 @@
 .addpost {
   height: 100vh;
-  background-color: #f3f3f3;
+  background-color: #fff;
 }
 .container {
   display: flex;
@@ -8,7 +8,7 @@
   flex-direction: column;
   flex: 1;
   margin: 0px auto;
-  background-color: #f3f3f3;
+  background-color: #fff;
   .home {
     width: 600px;
     color: #313037;
@@ -31,22 +31,17 @@
     }
   }
   .btnButtons {
-    width: 600px;
+    width: 550px;
     margin-bottom: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 30px auto 0;
-    .rightButton {
-      width: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
   }
 }
 .darkContainer {
-  background-color: #313037;
+  background-color: #272121;
+  height: 100vh;
 }
 .darkHome {
   color: #ffffff;

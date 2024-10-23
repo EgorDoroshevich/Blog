@@ -1,11 +1,11 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styles from "./SignIn.module.scss";
 import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../../components/Router/Router";
 import { useDispatch } from "react-redux";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {  setUser } from "../../redux/store/slices/signInSlice";
+import { setUser } from "../../redux/store/slices/signInSlice";
 import Button from "../../components/Button";
 import { ButtonSize } from "../../components/Button/Button";
 import { Checkbox } from "@mui/material";
@@ -13,6 +13,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import classNames from "classnames";
 import { Theme } from "../../components/config";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
+import Input from "../../components/Input";
 
 const SignIn = () => {
     const dispatch = useDispatch();

@@ -31,13 +31,16 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
         navigate(RoutesList.Home);
     };
     return (
-        <div className={styles.mainContainer}>
+        <div
+            className={classNames(styles.mainContainer, {
+                [styles.darkMainContainer]: themeValue === Theme.dark,
+            })}
+        >
             <form
                 className={classNames(styles.container, {
                     [styles.darkContainer]: themeValue === Theme.dark,
                 })}
             >
-
                 <Title title={title} />
                 <div
                     className={classNames(styles.formContainer, {
@@ -56,13 +59,20 @@ const FormPagesContainer: FC<FormPagesContainerProps> = ({
                             [styles.darkButton]: themeValue === Theme.dark,
                         })}
                     >
-                        <Button type={ButtonSize.large} title={btnTitle} onClick={onSubmit} />
+                        <Button
+                            type={
+                                themeValue === Theme.light
+                                    ? ButtonSize.large
+                                    : ButtonSize.largeDark
+                            }
+                            title={btnTitle}
+                            onClick={onSubmit}
+                        />
                     </div>
                     <div>{additionalInfo}</div>
                 </div>
             </form>
         </div>
-
     );
 };
 

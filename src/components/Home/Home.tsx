@@ -1,9 +1,11 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { PostSize } from "../config";
+import React, { useEffect, useState } from "react";
+import { PostSize, Theme } from "../config";
 import PostList from "../PostList";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import axios from "axios";
+import { useThemeContext } from "../../context/Theme";
+import Loading from "../Loading";
 
 const dataHard = [
     {
@@ -121,13 +123,13 @@ const Home = () => {
         fetchPosts();
         console.log(posts);
     }, []);
-
+    const { themeValue, onChangeTheme } = useThemeContext();
     const navigate = useNavigate();
     return (
         <div>
             <Header />
-
             {!error ? <PostList cardList={dataHard} /> : null}
+            {/* <Loading /> */}
         </div>
     );
 };

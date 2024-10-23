@@ -12,7 +12,6 @@ import { RoutesList } from "../Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import {
     LikeSelectors,
-    setFavoriteCard,
     setLike,
 } from "../../redux/store/slices/likeSlice";
 
@@ -73,7 +72,9 @@ const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
                             {title}
                         </div>
 
-                        <div className={styles.postText}>{text}</div>
+                        <div className={classNames(styles.postText, {
+                            [styles.darkPostText]: themeValue === Theme.dark
+                        })}>{text}</div>
                     </div>
                     <div className={styles.postImage}>
                         <img src={image} alt="imagePost" />
@@ -132,7 +133,7 @@ const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
                             className={classNames(styles.more, {
                                 [styles.darkMore]: themeValue === Theme.dark,
                             })}
-                            onClick={openModal}
+                            onClick={() => { }}
                         >
                             <MoreIcon />
                         </div>

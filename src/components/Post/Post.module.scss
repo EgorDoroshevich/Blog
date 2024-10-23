@@ -1,34 +1,40 @@
 .card {
   .postContainer {
     border-bottom: 1px solid #dadada;
-    padding: 10px;
+    margin: 10px 20px 10px 10px;
+    padding: 10px 0px;
     .postHead {
       display: flex;
       justify-content: space-between;
       .postText {
-        width: 448px;
+        margin-right: 30px;
         .postDate {
           width: 200px;
           font-weight: 400;
           font-size: 16px;
           line-height: 24px;
           color: #8d8e97;
+          font-family: "PTSerif";
         }
         .postTitle {
+          padding: 10px 0;
           font-weight: 700;
           font-size: 32px;
           line-height: 44px;
           color: #313037;
+          font-family: "PTSerif";
         }
         .postText {
+          padding: 10px 0;
           font-weight: 400;
           font-size: 16px;
           line-height: 28px;
           color: #8d8e97;
+          font-family: "PTSerif";
         }
       }
       .postImage {
-        width: 256px;
+        width: 656px;
         height: 244px;
         overflow: hidden;
         display: flex;
@@ -43,7 +49,7 @@
       }
     }
     .postButton {
-      width: 736px;
+      flex: 1;
       height: 65.5px;
       gap: 40px;
       display: flex;
@@ -195,4 +201,64 @@
   object-position: center;
 }
 .darkCard {
+  .darkPostContainer {
+    .darkPostHead {
+      .darkPostText {
+        .darkPostDate {
+          color: #d8d8d8;
+        }
+        .darkPostTitle {
+          color: #fff;
+        }
+        .darkPostText {
+          color: #d8d8d8;
+        }
+      }
+    }
+    .darkPostButton {
+      .darkButtonLike {
+        .darkLike {
+          .darkDislikeIcon {
+            svg > path {
+            }
+            svg > path {
+              stroke: #fff;
+            }
+          }
+          .darkLikeIcon {
+            svg > path {
+              fill: #fff;
+            }
+          }
+        }
+      }
+
+      .darkButtonInfo {
+        .darkSave {
+          transition: 0.5;
+          svg > path {
+            fill: #fff;
+          }
+          &:hover {
+            transition: 0.5;
+            svg > path {
+              fill: #c87272;
+            }
+          }
+        }
+        .darkMore {
+          transition: 0.5;
+          svg > path {
+            fill: #fff;
+          }
+          &:hover {
+            transition: 0.5;
+            svg > path {
+              fill: #c87272;
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -137,7 +137,7 @@ const AsideMenu = () => {
                                 title={
                                     themeValue === Theme.light ? <DarkModeIcon /> : <SunnyIcon />
                                 }
-                                type={ButtonSize.themeButton}
+                                type={ButtonSize.aside}
                                 onClick={
                                     themeValue === Theme.light
                                         ? onChangeTheme(Theme.dark)

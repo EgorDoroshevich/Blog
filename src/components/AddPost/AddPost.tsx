@@ -119,33 +119,20 @@ const AddPost = () => {
                         [styles.darkBtnButtons]: themeValue === Theme.dark,
                     })}
                 >
-                    <div
-                        className={classNames(styles.leftButton, {
-                            [styles.darkLeftButton]: themeValue === Theme.dark,
-                        })}
-                    >
-                        <Button
-                            onClick={() => { }}
-                            title={"Delete post"}
-                            type={ButtonSize.delete}
-                        />
-                    </div>
-                    <div
-                        className={classNames(styles.rightButton, {
-                            [styles.darkRightButton]: themeValue === Theme.dark,
-                        })}
-                    >
-                        <Button
-                            onClick={() => { }}
-                            title={"Cancel"}
-                            type={ButtonSize.cancel}
-                        />
-                        <Button
-                            onClick={handleSubmit}
-                            title={"Add post"}
-                            type={ButtonSize.small}
-                        />
-                    </div>
+                    <Button
+                        onClick={() => { }}
+                        title={"Cancel"}
+                        type={ButtonSize.cancel}
+                    />
+                    <Button
+                        onClick={handleSubmit}
+                        title={"Add post"}
+                        type={
+                            themeValue === Theme.light
+                                ? ButtonSize.small
+                                : ButtonSize.darkSmall
+                        }
+                    />
                 </div>
             </div>
         </div>

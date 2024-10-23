@@ -21,22 +21,27 @@ export enum RoutesList {
 }
 
 const AppRouter = () => {
-    // const [user, setUser] = useState<boolean>(false);
+    const [user, setUser] = useState<boolean>(false);
 
     return (
         <div>
-            <Routes>
-                <Route path={RoutesList.Home} element={<Home />} />
-                <Route path={RoutesList.Default} element={<SignIn />} />
-                <Route path={RoutesList.SignUp} element={<SignUp />} />
-                <Route
-                    path={RoutesList.RegistrationConfirmation}
-                    element={<RegistrationConfirmation />}
-                />
-                <Route path={RoutesList.AddPost} element={<AddPost />} />
-                <Route path={RoutesList.Default} element={<MyFavorites />} />
-                <Route path={RoutesList.MyFavorites} element={<MyFavorites />} />
-            </Routes>
+            {user === false ? (
+                <Routes>
+                    <Route path={RoutesList.Default} element={<SignIn />} />
+                    <Route path={RoutesList.SignUp} element={<SignUp />} />
+                </Routes>
+            ) : (
+                <Routes>
+                    <Route path={RoutesList.Home} element={<Home />} />
+                    <Route
+                        path={RoutesList.RegistrationConfirmation}
+                        element={<RegistrationConfirmation />}
+                    />
+                    <Route path={RoutesList.AddPost} element={<AddPost />} />
+                    <Route path={RoutesList.Default} element={<MyFavorites />} />
+                    <Route path={RoutesList.MyFavorites} element={<MyFavorites />} />
+                </Routes>
+            )}
 
             {/* <Header /> */}
         </div>

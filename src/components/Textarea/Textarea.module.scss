@@ -2,8 +2,13 @@
   width: 544px;
   height: 80px;
   padding: 10px;
-  color: #bdbfca;
-  font-size: 12px;
+  border: 1px solid #8d8e97;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #000;
+  font-family: "PTSerif";
+  font-weight: 100;
+  background-color: #f3f7fa;
 }
 .title {
   color: #313037;
@@ -15,7 +20,9 @@
   color: #ffffff;
 }
 .darkTextarea {
-  color: #ffffff;
-  background-color: #6a6a6b;
+  width: 550px;
+  color: #000;
+  font-family: "PTSerif";
+  background-color: #fff;
   border: 1px solid #8d8e97;
 }

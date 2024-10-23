@@ -1,89 +1,20 @@
 import React from "react";
 
-const LikeIcon = ({ width = "24", height = "24", fill = "#000000" }) => {
+const LikeIcon = ({ width = "24", height = "24", fill = "#000", stroke = "#fff" }) => {
     return (
         <div>
             <svg
                 width={width}
                 height={height}
-                viewBox="0 0 265 265"
+                viewBox="0 0 104 93"
                 fill={fill}
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M122.967 229.131C86.8782 229.044 8.00881 146.314 14.7103 91.3638C19.4285 52.6942 54.1606 28.7024 86.8515 41.967C104.431 49.1013 113.903 67.699 123.136 83.3194C133.949 66.4185 147.174 44.2087 166.943 37.5674C202.597 25.59 235.536 52.8352 239.136 94.4138C243.738 147.564 156.641 229.213 122.967 229.131Z"
+                    d="M49.8395 15.2079L52 18.9185L54.1605 15.2079C58.7106 7.39319 66.665 2.5 75.6364 2.5C89.6511 2.5 101.5 15.1169 101.5 31C101.5 38.0619 98.5285 45.3239 93.799 52.3727C89.0824 59.4023 82.7466 66.0267 76.3335 71.7614C69.9308 77.487 63.5167 82.2677 58.6975 85.6195C56.2902 87.2938 54.2865 88.6076 52.8886 89.5005C52.5596 89.7107 52.2642 89.8975 52.0051 90.0601C51.7452 89.8958 51.4487 89.7069 51.1182 89.4944C49.72 88.5948 47.7159 87.2717 45.3082 85.5871C40.4882 82.2148 34.073 77.4094 27.669 71.6669C21.2547 65.9151 14.9175 59.2814 10.1999 52.2621C5.46826 45.2219 2.5 37.9935 2.5 31C2.5 15.1169 14.3489 2.5 28.3636 2.5C37.335 2.5 45.2894 7.39319 49.8395 15.2079Z"
+                    stroke={stroke}
+                    strokeWidth="5"
                     fill={fill}
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M204.479 39.2418C207.795 36.1357 211.143 33.0358 214.709 30.2168"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M103.102 53.73C107.715 50.5198 112.016 46.9503 116.442 43.502"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M80.6953 39.8433C85.3065 36.6352 89.6075 33.0657 94.0337 29.6152"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M231.867 66.7808C236.478 63.5706 240.779 60.0032 245.206 56.5527"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M238.533 107.819C243.147 104.609 247.447 101.042 251.874 97.5918"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M220.002 151.18C225.164 148.956 230.09 146.318 235.115 143.82"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M183.621 193.589C188.788 190.745 218.558 175.687 223.556 172.572"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    stroke-Miterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-                <path
-                    d="M148.027 236.581C153.14 233.645 182.639 218.059 187.58 214.855"
-                    stroke={fill}
-                    strokeWidth="14.6594"
-                    strokeMiterlimit="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
                 />
             </svg>
         </div>

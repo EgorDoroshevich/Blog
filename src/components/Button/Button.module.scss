@@ -42,13 +42,32 @@
   gap: 10px;
   border: 2px solid transparent;
   border-radius: 2px;
-  background-color: #2231aa;
+  color: #064b66;
+  background-color: #c6d7e3;
   transition: 0.5s;
   text-align: center;
-  color: #fff;
   cursor: pointer;
   &:hover {
-    background-color: #5360cd;
+    background-color: #7aa2bc;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+.darkSmall {
+  width: 144px;
+  line-height: 38px;
+  padding: 16px, 32px, 16px, 32px;
+  gap: 10px;
+  border: 1px solid rgba(232, 232, 232, 0.2);
+  border-radius: 2px;
+  color: #803b3b;
+  background-color: #272121;
+  transition: 0.5s;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #412420;
+    color: #fff;
     cursor: pointer;
   }
 }

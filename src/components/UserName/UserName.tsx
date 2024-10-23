@@ -5,10 +5,10 @@ import classNames from "classnames";
 import { Theme } from "../config";
 
 type UserProps = {
-    email: any;
+    name: string;
 };
 
-const UserName: FC<UserProps> = ({ email }) => {
+const UserName: FC<UserProps> = ({ name }) => {
     const { themeValue } = useThemeContext();
     return (
         <div>
@@ -22,7 +22,7 @@ const UserName: FC<UserProps> = ({ email }) => {
                         [styles.darkName]: themeValue === Theme.dark,
                     })}
                 >
-                    <p>{email}</p>
+                    <p>{name}</p>
                 </div>
             </div>
         </div>

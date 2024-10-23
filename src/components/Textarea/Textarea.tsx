@@ -45,6 +45,7 @@ const Textarea: FC<TextProps> = ({ value, placeholder, onChange, title }) => {
                         [styles.darkTextarea]: themeValue === Theme.dark,
                     })}
                     {...textareaProps}
+                    placeholder={'Enter your text ...'}
                 />
             </div>
         </div>

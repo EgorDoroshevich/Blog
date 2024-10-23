@@ -28,7 +28,7 @@ const RegistrationConfirmation = () => {
                             [styles.darkText]: themeValue === Theme.dark,
                         })}
                     >
-                        <p>Регистрация успешно завершена</p>
+                        <p>Registration completed successfully!</p>
                     </div>
                 </FormPagesContainer>
             </div>

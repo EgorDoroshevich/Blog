@@ -4,6 +4,7 @@ import classNames from "classnames";
 
 export enum ButtonSize {
     small = "small",
+    darkSmall="darkSmall",
     middle = "middle",
     large = "large",
     largeDark = "largeDark",
