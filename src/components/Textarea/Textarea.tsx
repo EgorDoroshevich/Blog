@@ -9,6 +9,7 @@ type TextProps = {
     value: string;
     onChange: (value: string) => void;
     title: string;
+    required?: boolean;
 };
 
 const Textarea: FC<TextProps> = ({ value, placeholder, onChange, title }) => {

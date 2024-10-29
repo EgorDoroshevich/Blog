@@ -10,12 +10,18 @@ import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    LikeSelectors,
-    setLike,
-} from "../../redux/store/slices/likeSlice";
+import { LikeSelectors, setLike } from "../../redux/store/slices/likeSlice";
 
-const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
+const Post: FC<PostProps> = ({
+    type,
+    id,
+    like,
+    image,
+    text,
+    date,
+    title,
+    author,
+}) => {
     const PostType = styles[type];
     const [likeStatus, setLikeState] = useState<boolean>(false);
     const { themeValue } = useThemeContext();
@@ -29,9 +35,7 @@ const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
             console.log(likeStatus);
         };
     const navigate = useNavigate();
-    const openModal = () => {
-        navigate(RoutesList.Modal);
-    };
+
     const handeBack = useCallback(() => {
         navigate(RoutesList.Home);
     }, []);
@@ -58,11 +62,25 @@ const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
                         })}
                     >
                         <div
-                            className={classNames(styles.postDate, {
-                                [styles.darkPostDate]: themeValue === Theme.dark,
+                            className={classNames(styles.postHead__item, {
+                                [styles.darkPostHead__item]: themeValue === Theme.dark,
                             })}
                         >
-                            {date}
+                            <div
+                                className={classNames(styles.author, {
+                                    [styles.darkAuthor]: themeValue === Theme.dark,
+                                })}
+                            >
+                                <p>Author:</p>
+                                {author}
+                            </div>
+                            <div
+                                className={classNames(styles.date, {
+                                    [styles.darkDate]: themeValue === Theme.dark,
+                                })}
+                            >
+                                {date}
+                            </div>
                         </div>
                         <div
                             className={classNames(styles.postTitle, {
@@ -72,9 +90,13 @@ const Post: FC<PostProps> = ({ type, id, like, image, text, date, title }) => {
                             {title}
                         </div>
 
-                        <div className={classNames(styles.postText, {
-                            [styles.darkPostText]: themeValue === Theme.dark
-                        })}>{text}</div>
+                        <div
+                            className={classNames(styles.postText, {
+                                [styles.darkPostText]: themeValue === Theme.dark,
+                            })}
+                        >
+                            {text}
+                        </div>
                     </div>
                     <div className={styles.postImage}>
                         <img src={image} alt="imagePost" />

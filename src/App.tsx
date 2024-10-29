@@ -7,6 +7,7 @@ import AppRouter from "./components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeSelectors, setThemeValue } from "./redux/store/slices/themeSlice";
 import app from "./firebase";
+import Home from "./components/Home";
 
 function App() {
   const dispath = useDispatch();

@@ -23,7 +23,7 @@ export type PostProps = {
   text: string;
   date: string;
   title: string;
-  author?: string;
+  author: string;
   like: boolean;
 };
 

@@ -16,6 +16,7 @@ import Button from "../../components/Button";
 import { Checkbox } from "@mui/material";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Loading from "../../components/Loading";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -33,6 +34,7 @@ const SignUp = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confpassword, setConfpassword] = useState("");
+    const [loading, setLoading] = useState<boolean>(false);
 
     const navigate = useNavigate();
     const { themeValue, onChangeTheme } = useThemeContext();
@@ -48,6 +50,7 @@ const SignUp = () => {
         } else if (password === "") {
             alert("введите пароль");
         } else {
+            setLoading(true);
             try {
                 const userCredential = await createUserWithEmailAndPassword(
                     auth,
@@ -69,16 +72,13 @@ const SignUp = () => {
                             body: JSON.stringify(name),
                         }
                     );
-                    // if (response.ok) {
-                    //     navigate(RoutesList.Home);
-                    // } else {
-                    //     console.error("Failed to submit post");
-                    // }
                 }
                 navigate(RoutesList.RegistrationConfirmation);
                 console.log("User created:", userCredential.user);
             } catch (error) {
                 console.error("Error creating user:", error);
+            } finally {
+                setLoading(false);
             }
         }
     };
@@ -284,6 +284,7 @@ const SignUp = () => {
                             [styles.darkSignIn]: themeValue === Theme.dark,
                         })}
                     />
+                    {loading && <Loading />}
                 </div>
             </div>
 

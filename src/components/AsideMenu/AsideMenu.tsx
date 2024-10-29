@@ -14,7 +14,10 @@ import { useDispatch } from "react-redux";
 import { removeUser } from "../../redux/store/slices/userSlice";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
 
-const AsideMenu = () => {
+type AsideMenuProps = {
+    onLogout?: () => void;
+};
+const AsideMenu = ({ onLogout }: AsideMenuProps) => {
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
@@ -27,23 +30,15 @@ const AsideMenu = () => {
     const onNavigateToAddPost = () => {
         navigate(RoutesList.AddPost);
     };
-    const onNavigateToSignIn = () => {
-        navigate(RoutesList.SignIn);
-    };
-    const onNavigateToSignUp = () => {
-        navigate(RoutesList.SignUp);
-    };
-
-    const onNavigateToModal = () => {
-        navigate(RoutesList.Modal);
-    };
-
     const onClickMyFavorites = () => {
         navigate(RoutesList.MyFavorites);
     };
 
     const onClickLogOut = () => {
         dispatch(removeUser());
+        if (onLogout) {
+            onLogout();
+        }
         navigate(RoutesList.SignIn);
     };
 

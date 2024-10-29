@@ -16,6 +16,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: true,
+        author: "Egor",
     },
     {
         title:
@@ -25,6 +26,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: true,
+        author: "Egor",
     },
     {
         title:
@@ -34,6 +36,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: true,
+        author: "Egor",
     },
     {
         title:
@@ -43,6 +46,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -52,6 +56,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -61,6 +66,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -70,6 +76,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -79,6 +86,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -88,6 +96,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -97,6 +106,7 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
     {
         title:
@@ -106,11 +116,12 @@ const dataHard = [
         image: require("../../images/polya.jpeg"),
         type: PostSize.card,
         like: false,
+        author: "Egor",
     },
 ];
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState();
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -119,6 +130,7 @@ const Home = () => {
                 "https://myth-p-default-rtdb.firebaseio.com/posts.json"
             );
             setPosts(response.data);
+            console.log(response.data);
         };
         fetchPosts();
         console.log(posts);
@@ -129,7 +141,6 @@ const Home = () => {
         <div>
             <Header />
             {!error ? <PostList cardList={dataHard} /> : null}
-            {/* <Loading /> */}
         </div>
     );
 };

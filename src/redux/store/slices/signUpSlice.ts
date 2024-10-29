@@ -29,7 +29,7 @@ const signUpSlice = createSlice({
 // export const { setUser } = signUpSlice.actions;
 
 export const SignUpSelectors = {
-  getUser: (state: RootState) => state.UserReducer.email,
+  getUser: (state: RootState) => state.user.email,
 };
 
 export default signUpSlice.reducer;

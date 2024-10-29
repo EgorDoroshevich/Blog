@@ -11,7 +11,7 @@ export const store = configureStore({
     themeReducer,
     signInReducer,
     signUpReducer,
-    UserReducer,
+    user: UserReducer,
   },
 });
 

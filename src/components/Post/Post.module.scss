@@ -8,13 +8,20 @@
       justify-content: space-between;
       .postText {
         margin-right: 30px;
-        .postDate {
-          width: 200px;
+        .postHead__item {
+          width: 100px;
           font-weight: 400;
           font-size: 16px;
           line-height: 24px;
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
           color: #8d8e97;
           font-family: "PTSerif";
+          .author {
+            display: flex;
+            justify-content: space-between;
+          }
         }
         .postTitle {
           padding: 10px 0;
@@ -204,7 +211,7 @@
   .darkPostContainer {
     .darkPostHead {
       .darkPostText {
-        .darkPostDate {
+        .darkPostHead__item {
           color: #d8d8d8;
         }
         .darkPostTitle {
