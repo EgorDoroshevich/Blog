@@ -1,17 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import likeReducer from "./slices/likeSlice";
 import themeReducer from "./slices/themeSlice";
-import signInReducer from "./slices/signInSlice";
-import signUpReducer from "./slices/signUpSlice";
 import UserReducer from "./slices/userSlice";
-
+import routeReducer from "./slices/routeSlice";
 export const store = configureStore({
   reducer: {
     likeReducer,
     themeReducer,
-    signInReducer,
-    signUpReducer,
     user: UserReducer,
+    routeReducer,
   },
 });
 

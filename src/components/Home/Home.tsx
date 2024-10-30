@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PostSize, Theme } from "../config";
+import { PostProps, PostSize, Theme } from "../config";
 import PostList from "../PostList";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
@@ -121,26 +121,47 @@ const dataHard = [
 ];
 
 const Home = () => {
-    const [posts, setPosts] = useState();
-    const [error, setError] = useState(null);
+    const [posts, setPosts] = useState<PostProps[]>([]);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await axios(
-                "https://myth-p-default-rtdb.firebaseio.com/posts.json"
-            );
-            setPosts(response.data);
-            console.log(response.data);
+            try {
+                const response = await axios.get(
+                    "https://myth-p-default-rtdb.firebaseio.com/posts.json"
+                );
+                if (response.data) {
+                    const postsArray: PostProps[] = response.data.map(
+                        (post: PostProps) => ({
+                            type: PostSize.card, // или PostSize.modal в зависимости от ситуации
+                            id: post.id,
+                            image: post.image,
+                            text: post.text,
+                            date: post.date,
+                            title: post.title,
+                            author: post.author,
+                            like: post.like,
+                        })
+                    );
+                    setPosts(postsArray);
+                } else {
+                    setPosts([]);
+                }
+            } catch (err) {
+                console.error("Ошибка при загрузке данных:", err);
+                setError("Не удалось загрузить посты.");
+            }
         };
+
         fetchPosts();
-        console.log(posts);
     }, []);
+
     const { themeValue, onChangeTheme } = useThemeContext();
     const navigate = useNavigate();
     return (
         <div>
             <Header />
-            {!error ? <PostList cardList={dataHard} /> : null}
+            {!error ? <PostList cardList={posts} /> : null}
         </div>
     );
 };

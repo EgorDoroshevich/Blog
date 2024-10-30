@@ -8,39 +8,23 @@ import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import AsideMenu from "../AsideMenu";
 import Search from "../Search";
 import UserName from "../UserName";
-import app from "../../firebase";
-import { getAuth } from "firebase/auth";
 import { Theme } from "../config";
 import classNames from "classnames";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { UserSelectors } from "../../redux/store/slices/userSlice";
 
 const Header = () => {
+    const userName = useSelector(UserSelectors.getUser);
+    const [name, setName] = useState(userName.name);
     const [burger, setBurger] = useState<boolean>(true);
-    const [name, setName] = useState("");
-
-    const auth = getAuth(app);
-    console.log(auth);
 
     const onClickBurger = () => {
         setBurger((prevState) => !prevState);
     };
 
     useEffect(() => {
-        const getName = async () => {
-            const response = await axios(
-                "https://myth-p-default-rtdb.firebaseio.com/name.json"
-            );
-            const data = response.data;
-            const userName = Object.values(data)[1]; // Подумать как подтягивать имя коректно!
-            if (typeof userName === "string") {
-                setName(userName);
-            } else {
-                console.error("Полученные данные не являются строкой");
-            }
-        };
-        getName();
-        console.log(name);
-    }, []);
+        setName(name);
+    }, [userName]);
 
     const { themeValue } = useThemeContext();
     return (

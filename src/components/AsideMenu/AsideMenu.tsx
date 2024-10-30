@@ -2,23 +2,21 @@ import React, { useState } from "react";
 import styles from "./AsideMenu.module.scss";
 import Button from "../Button";
 import { ButtonSize } from "../Button/Button";
-import MoonIcon from "../../icons/MoonIcon/MoonIcon";
 import { useThemeContext } from "../../context/Theme";
 import { Theme } from "../config";
 import classNames from "classnames";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
-import UserName from "../UserName";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../redux/store/slices/userSlice";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
+import { RouteSelectors, setRoute } from "../../redux/store/slices/routeSlice";
+import Loading from "../Loading";
 
-type AsideMenuProps = {
-    onLogout?: () => void;
-};
-const AsideMenu = ({ onLogout }: AsideMenuProps) => {
+const AsideMenu = () => {
     const dispatch = useDispatch();
+    const toggle = useSelector(RouteSelectors.getRoute);
 
     const navigate = useNavigate();
 
@@ -36,12 +34,9 @@ const AsideMenu = ({ onLogout }: AsideMenuProps) => {
 
     const onClickLogOut = () => {
         dispatch(removeUser());
-        if (onLogout) {
-            onLogout();
-        }
+        dispatch(setRoute(false));
         navigate(RoutesList.SignIn);
     };
-
     return (
         <div
             className={classNames(styles.asideMenu, {

@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
 import Home from "../Home";
 import SignIn from "../../pages/SignIn";
 import SignUp from "../../pages/SignUp";
 import AddPost from "../AddPost";
 import RegistrationConfirmation from "../../pages/RegistrationConfirmation";
 import MyFavorites from "../../pages/MyFavorites";
-import Button from "../Button";
-import { ButtonSize } from "../Button/Button";
 import AsideMenu from "../AsideMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { RouteSelectors, setRoute } from "../../redux/store/slices/routeSlice";
 
 export enum RoutesList {
     Home = "/home",
@@ -22,23 +21,23 @@ export enum RoutesList {
 }
 
 const AppRouter = () => {
-    const [login, setLogin] = useState(false);
+    const dispatch = useDispatch();
+    const toggle = useSelector(RouteSelectors.getRoute);
 
     const handleLogin = () => {
-        setLogin(true);
+        dispatch(setRoute(true));
     };
-    const handleLogout = () => {
-        setLogin((prevState) => !prevState);
-    };
-    console.log(login);
+
     const guestRoutes = (
         <Routes>
             <Route
                 path={RoutesList.SignIn}
                 element={<SignIn setLogin={handleLogin} />}
             />
-            {/* <Route path={RoutesList.Home} element={<Home />} /> */}
-            <Route path={RoutesList.SignUp} element={<SignUp />} />
+            <Route
+                path={RoutesList.SignUp}
+                element={<SignUp setSignUp={handleLogin} />}
+            />
             <Route
                 path={RoutesList.Default}
                 element={<SignIn setLogin={handleLogin} />}
@@ -48,17 +47,13 @@ const AppRouter = () => {
 
     const userRoutes = (
         <div>
-            {/* <AsideMenu onLogout={handleLogout} /> */}
             <Routes>
                 <Route path={RoutesList.Home} element={<Home />} />
                 <Route
                     path={RoutesList.RegistrationConfirmation}
                     element={<RegistrationConfirmation />}
                 />
-                <Route
-                    path={RoutesList.AsideMenu}
-                    element={<AsideMenu onLogout={handleLogout} />}
-                />
+                <Route path={RoutesList.AsideMenu} element={<AsideMenu />} />
                 <Route path={RoutesList.AddPost} element={<AddPost />} />
                 <Route path={RoutesList.MyFavorites} element={<MyFavorites />} />
                 <Route path={RoutesList.Default} element={<Home />} />
@@ -66,7 +61,7 @@ const AppRouter = () => {
         </div>
     );
 
-    return <div>{login === true ? userRoutes : guestRoutes}</div>;
+    return <div>{toggle === true ? userRoutes : guestRoutes}</div>;
 };
 
 export default AppRouter;
