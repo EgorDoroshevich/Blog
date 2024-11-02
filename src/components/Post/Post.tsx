@@ -1,16 +1,19 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useState } from "react";
 import styles from "./Post.module.scss";
-import { LikeStatus, PostProps, PostSize, Theme } from "../config";
+import { LikeStatus, PostProps, Theme } from "../config";
 import LikeIcon from "../../icons/LikeIcon/LikeIcon";
 import DislikeIcon from "../../icons/DislikeIcon/DislikeIcon";
 import SaveIcon from "../../icons/SaveIcon/SaveIcon";
-import MoreIcon from "../../icons/MoreIcon/MoreIcon";
 import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { LikeSelectors, setLike } from "../../redux/store/slices/likeSlice";
+import DeleteIcon from "../../icons/Delete/DeleteIcon";
+import EditIcon from "../../icons/EditIcon/EditIcon";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Post: FC<PostProps> = ({
     type,
@@ -71,7 +74,7 @@ const Post: FC<PostProps> = ({
                                     [styles.darkAuthor]: themeValue === Theme.dark,
                                 })}
                             >
-                                <p>Author:</p>
+                                <p className={styles.text}>Author:</p>
                                 {author}
                             </div>
                             <div
@@ -98,7 +101,7 @@ const Post: FC<PostProps> = ({
                             {text}
                         </div>
                     </div>
-                    <div className={styles.postImage}>
+                    <div className={classNames(styles.postImage)}>
                         <img src={image} alt="imagePost" />
                     </div>
                 </div>
@@ -117,7 +120,7 @@ const Post: FC<PostProps> = ({
                                 [styles.darkLike]: themeValue === Theme.dark,
                             })}
                             // onClick={toggleLike(isLike)}
-                            onClick={toggleLike(like)}
+                            onClick={() => { }}
                         >
                             {likeStatus === false ? (
                                 <div
@@ -152,12 +155,19 @@ const Post: FC<PostProps> = ({
                             <SaveIcon />
                         </div>
                         <div
-                            className={classNames(styles.more, {
-                                [styles.darkMore]: themeValue === Theme.dark,
+                            className={classNames(styles.edit, {
+                                [styles.darkEdit]: themeValue === Theme.dark,
+                            })}
+                        >
+                            <EditIcon />
+                        </div>
+                        <div
+                            className={classNames(styles.delete, {
+                                [styles.darkDelete]: themeValue === Theme.dark,
                             })}
                             onClick={() => { }}
                         >
-                            <MoreIcon />
+                            <DeleteIcon />
                         </div>
                     </div>
                 </div>

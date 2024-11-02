@@ -23,8 +23,8 @@ export type PostProps = {
   text: string;
   date: string;
   title: string;
-  author: string;
-  like: boolean;
+  author?: string;
+  like?: boolean;
 };
 
 export type PostsList = PostProps[];

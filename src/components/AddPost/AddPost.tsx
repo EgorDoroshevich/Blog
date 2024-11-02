@@ -15,6 +15,8 @@ import { storage } from "../../firebase";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import Loading from "../Loading";
+import { useSelector } from "react-redux";
+import { UserSelectors } from "../../redux/store/slices/userSlice";
 
 const AddPost = () => {
     const { themeValue } = useThemeContext();
@@ -22,19 +24,20 @@ const AddPost = () => {
     const onNavigateToHome = () => {
         navigate(RoutesList.Home);
     };
-
-    const [title, setTitle] = useState("");
-    const [text, setText] = useState("");
+    const userName = useSelector(UserSelectors.getUser);
+    const [title, setTitle] = useState<string>("");
+    const [text, setText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
+    console.log(title);
 
-    // https://myth-p-default-rtdb.firebaseio.com/  firebase data
+    const [image, setImage] = useState<File | undefined>(undefined);
 
-    const [image, setImage] = useState<File | null>(null);
     const handleImageChange = (value: string | File) => {
         if (value instanceof File) {
             setImage(value);
         }
     };
+
     const uploadImage = async (file: any) => {
         if (!file) return null;
 
@@ -51,9 +54,18 @@ const AddPost = () => {
     };
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        const imageUrl = await uploadImage(image); // Загружаем изображение и получаем его URL
-        const postData = { title, image: imageUrl, text, date: Date.now() };
         setLoading(true);
+        const imageUrl = await uploadImage(image);
+
+        const DATE = new Date(Date.now()).toLocaleDateString();
+        const postData = {
+            title,
+            image: imageUrl,
+            text,
+            date: DATE,
+            name: userName?.name || "",
+        };
+
         try {
             const response = await fetch(
                 "https://myth-p-default-rtdb.firebaseio.com/posts.json",
@@ -106,17 +118,29 @@ const AddPost = () => {
                                 [styles.darkInputTitle]: themeValue === Theme.dark,
                             })}
                         >
-                            <Input
-                                value={title}
-                                onChange={(value: string | File) => {
-                                    if (typeof value === "string") {
-                                        setTitle(value);
-                                    }
-                                }}
-                                title={"Title"}
-                                placeholder={"title"}
-                                type="text"
-                            />
+                            <div
+                                className={classNames(styles.container_item, {
+                                    [styles.darkContainer_item]: themeValue === Theme.dark,
+                                })}
+                            >
+                                <label
+                                    className={classNames(styles.label, {
+                                        [styles.darkLabel]: themeValue === Theme.dark,
+                                    })}
+                                >
+                                    Title
+                                </label>
+                                <input
+                                    title={"Title"}
+                                    placeholder={"title"}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    value={title}
+                                    type="text"
+                                    className={classNames(styles.input__item, {
+                                        [styles.darkInput__item]: themeValue === Theme.dark,
+                                    })}
+                                />
+                            </div>
                         </div>
                         <div
                             className={classNames(styles.inputImage, {

@@ -21,6 +21,9 @@
           .author {
             display: flex;
             justify-content: space-between;
+            .text {
+              margin-right: 10px;
+            }
           }
         }
         .postTitle {
@@ -41,7 +44,7 @@
         }
       }
       .postImage {
-        width: 656px;
+        width: 400px;
         height: 244px;
         overflow: hidden;
         display: flex;
@@ -84,7 +87,7 @@
         }
       }
       .buttonInfo {
-        width: 80px;
+        width: 150px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -93,8 +96,15 @@
             cursor: pointer;
           }
         }
-        .more {
-          margin: 0 15px;
+        .edit {
+          &:hover {
+            cursor: pointer;
+            svg > path {
+              fill: "#f1f1f1";
+            }
+          }
+        }
+        .delete {
           &:hover {
             cursor: pointer;
           }
@@ -253,7 +263,19 @@
             }
           }
         }
-        .darkMore {
+        .darkDelete {
+          transition: 0.5;
+          svg > path {
+            fill: #fff;
+          }
+          &:hover {
+            transition: 0.5;
+            svg > path {
+              fill: #c87272;
+            }
+          }
+        }
+        .darkEdit {
           transition: 0.5;
           svg > path {
             fill: #fff;

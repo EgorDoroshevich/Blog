@@ -6,7 +6,7 @@ import { Theme } from "../config";
 
 type InputProps = {
   placeholder: string;
-  value?: string | any;
+  value?: string | File;
   title: string;
   onChange: (value: string | File) => void;
   disablead?: boolean;
@@ -17,29 +17,12 @@ const Input = ({ placeholder, title, onChange, value, type }: InputProps) => {
   const { themeValue } = useThemeContext();
 
   const [text, setText] = useState<string>("");
-
-  // const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   if (type === "file" && event.target.files?.[0]) {
-  //     const file = event.target.files[0];
-  //     const previewUrl = URL.createObjectURL(file);
-
-  //     onChange(previewUrl); // Вызываем onChange с URL изображения
-  //   } else {
-  //     const textValue = event.target.value;
-  //     setText(textValue);
-  //     onChange(textValue); // Вызываем onChange с текстом
-  //   }
-  // };
-  const onInputChange = (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
+  const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.type === "file") {
-      const file = event.target.files?.[0]; // Получаем выбранный файл
+      const file = event.target.files?.[0];
       if (file) {
-        console.log("File selected:", file); // Отладочный вывод
-        onChange(file); // Передаем файл в onChange
-      } else {
-        console.error("No file selected"); // Если файл не выбран
+        console.log("File selected:", file);
+        onChange(file);
       }
     } else {
       setText(event.target.value);
