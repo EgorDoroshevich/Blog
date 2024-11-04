@@ -23,7 +23,7 @@ const PostList: FC<CardList> = ({ cardList }) => {
                 [styles.darkCard]: themeValue === Theme.dark
             })}>
                 {cardList.map((el, id) => {
-                    return <Post id={el.id} {...el} />;
+                    return <Post key={el.id} {...el} />;
                 })}
             </div>
         </div>

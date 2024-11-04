@@ -1,5 +1,5 @@
-import React, { FC, ReactElement } from "react";
-import { PostSize, PostsList } from "../config";
+import React, { FC } from "react";
+import { PostsList } from "../config";
 import Post from "../Post";
 
 type SaveProps = {
@@ -7,11 +7,10 @@ type SaveProps = {
 };
 
 const SavePost: FC<SaveProps> = ({ saveCard }) => {
-
     return (
         <div>
             {saveCard.map((item, idx) => {
-                return <Post id={item.id} {...item} />;
+                return <Post key={item.id || idx} {...item} />;
             })}
         </div>
     );

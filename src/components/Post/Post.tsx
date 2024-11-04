@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useState } from "react";
 import styles from "./Post.module.scss";
-import { LikeStatus, PostProps, Theme } from "../config";
+import { PostProps, Theme } from "../config";
 import LikeIcon from "../../icons/LikeIcon/LikeIcon";
 import DislikeIcon from "../../icons/DislikeIcon/DislikeIcon";
 import SaveIcon from "../../icons/SaveIcon/SaveIcon";
@@ -8,12 +8,11 @@ import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
 import { RoutesList } from "../Router/Router";
-import { useDispatch, useSelector } from "react-redux";
-import { LikeSelectors, setLike } from "../../redux/store/slices/likeSlice";
 import DeleteIcon from "../../icons/Delete/DeleteIcon";
 import EditIcon from "../../icons/EditIcon/EditIcon";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import { dbRealtime, deletePost } from "../../firebase";
+import { remove } from "firebase/database";
+import { ref } from "firebase/storage";
 
 const Post: FC<PostProps> = ({
     type,
@@ -28,17 +27,16 @@ const Post: FC<PostProps> = ({
     const PostType = styles[type];
     const [likeStatus, setLikeState] = useState<boolean>(false);
     const { themeValue } = useThemeContext();
-    const dispatch = useDispatch();
-    const isLike = useSelector(LikeSelectors.getIsLike);
-    const favorite = useSelector(LikeSelectors.getFavorite);
-    const toggleLike =
-        (like: boolean) => (event: React.MouseEvent<HTMLDivElement>) => {
-            setLikeState((prev) => !prev);
-            dispatch(setLike(likeStatus));
-            console.log(likeStatus);
-        };
     const navigate = useNavigate();
 
+    const handleDelete = async (id: any) => {
+        try {
+            await deletePost(id);
+            console.log("Post deleted successfully");
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
+    };
     const handeBack = useCallback(() => {
         navigate(RoutesList.Home);
     }, []);
@@ -165,7 +163,7 @@ const Post: FC<PostProps> = ({
                             className={classNames(styles.delete, {
                                 [styles.darkDelete]: themeValue === Theme.dark,
                             })}
-                            onClick={() => { }}
+                            onClick={() => handleDelete(id)}
                         >
                             <DeleteIcon />
                         </div>

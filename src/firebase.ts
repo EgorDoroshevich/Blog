@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getDatabase, ref, remove } from "firebase/database";
 
 console.log(process.env);
 
@@ -20,5 +21,17 @@ export default app;
 
 export { app };
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const database = getFirestore(app);
+export const dbRealtime = getDatabase(app);
 export const storage = getStorage(app);
+
+export const deletePost = async (postId: any) => {
+  try {
+    const postRef = ref(dbRealtime, `posts/${postId}`); // Указываем путь к посту
+    remove(postRef); // Удаляем пост
+    console.log(` delete post ${postId}`);
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    // throw error; // Можно выбросить ошибку для обработки ее в вызывающем коде
+  }
+};
