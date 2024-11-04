@@ -28,7 +28,7 @@ export const storage = getStorage(app);
 export const deletePost = async (postId: any) => {
   try {
     const postRef = ref(dbRealtime, `posts/${postId}`); // Указываем путь к посту
-    remove(postRef); // Удаляем пост
+    await remove(postRef); // Удаляем пост
     console.log(` delete post ${postId}`);
   } catch (error) {
     console.error("Error deleting post:", error);

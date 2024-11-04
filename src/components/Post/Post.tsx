@@ -13,6 +13,7 @@ import EditIcon from "../../icons/EditIcon/EditIcon";
 import { dbRealtime, deletePost } from "../../firebase";
 import { remove } from "firebase/database";
 import { ref } from "firebase/storage";
+import Loading from "../Loading";
 
 const Post: FC<PostProps> = ({
     type,
@@ -23,17 +24,23 @@ const Post: FC<PostProps> = ({
     date,
     title,
     author,
+    onDelete,
 }) => {
     const PostType = styles[type];
     const [likeStatus, setLikeState] = useState<boolean>(false);
+    const [loading, setLoadnig] = useState<boolean>(false);
     const { themeValue } = useThemeContext();
     const navigate = useNavigate();
 
-    const handleDelete = async (id: any) => {
+    const handleDeleteClick = async () => {
+        setLoadnig(true);
         try {
             await deletePost(id);
             console.log("Post deleted successfully");
+            onDelete && onDelete(id);
+            setLoadnig(false);
         } catch (error) {
+            setLoadnig(false);
             console.error("Error deleting post:", error);
         }
     };
@@ -47,129 +54,133 @@ const Post: FC<PostProps> = ({
                 [styles.darkCard]: themeValue === Theme.dark,
             })}
         >
-            <div
-                className={classNames(styles.postContainer, {
-                    [styles.darkPostContainer]: themeValue === Theme.dark,
-                })}
-            >
+            {loading === true ? (
+                <Loading />
+            ) : (
                 <div
-                    className={classNames(styles.postHead, {
-                        [styles.darkPostHead]: themeValue === Theme.dark,
+                    className={classNames(styles.postContainer, {
+                        [styles.darkPostContainer]: themeValue === Theme.dark,
                     })}
                 >
                     <div
-                        className={classNames(styles.postText, {
-                            [styles.darkPostText]: themeValue === Theme.dark,
+                        className={classNames(styles.postHead, {
+                            [styles.darkPostHead]: themeValue === Theme.dark,
                         })}
                     >
-                        <div
-                            className={classNames(styles.postHead__item, {
-                                [styles.darkPostHead__item]: themeValue === Theme.dark,
-                            })}
-                        >
-                            <div
-                                className={classNames(styles.author, {
-                                    [styles.darkAuthor]: themeValue === Theme.dark,
-                                })}
-                            >
-                                <p className={styles.text}>Author:</p>
-                                {author}
-                            </div>
-                            <div
-                                className={classNames(styles.date, {
-                                    [styles.darkDate]: themeValue === Theme.dark,
-                                })}
-                            >
-                                {date}
-                            </div>
-                        </div>
-                        <div
-                            className={classNames(styles.postTitle, {
-                                [styles.darkPostTitle]: themeValue === Theme.dark,
-                            })}
-                        >
-                            {title}
-                        </div>
-
                         <div
                             className={classNames(styles.postText, {
                                 [styles.darkPostText]: themeValue === Theme.dark,
                             })}
                         >
-                            {text}
+                            <div
+                                className={classNames(styles.postHead__item, {
+                                    [styles.darkPostHead__item]: themeValue === Theme.dark,
+                                })}
+                            >
+                                <div
+                                    className={classNames(styles.author, {
+                                        [styles.darkAuthor]: themeValue === Theme.dark,
+                                    })}
+                                >
+                                    <p className={styles.text}>Author:</p>
+                                    {author}
+                                </div>
+                                <div
+                                    className={classNames(styles.date, {
+                                        [styles.darkDate]: themeValue === Theme.dark,
+                                    })}
+                                >
+                                    {date}
+                                </div>
+                            </div>
+                            <div
+                                className={classNames(styles.postTitle, {
+                                    [styles.darkPostTitle]: themeValue === Theme.dark,
+                                })}
+                            >
+                                {title}
+                            </div>
+
+                            <div
+                                className={classNames(styles.postText, {
+                                    [styles.darkPostText]: themeValue === Theme.dark,
+                                })}
+                            >
+                                {text}
+                            </div>
                         </div>
-                    </div>
-                    <div className={classNames(styles.postImage)}>
-                        <img src={image} alt="imagePost" />
-                    </div>
-                </div>
-                <div
-                    className={classNames(styles.postButton, {
-                        [styles.darkPostButton]: themeValue === Theme.dark,
-                    })}
-                >
-                    <div
-                        className={classNames(styles.buttonLike, {
-                            [styles.darkButtonLike]: themeValue === Theme.dark,
-                        })}
-                    >
-                        <div
-                            className={classNames(styles.like, {
-                                [styles.darkLike]: themeValue === Theme.dark,
-                            })}
-                            // onClick={toggleLike(isLike)}
-                            onClick={() => { }}
-                        >
-                            {likeStatus === false ? (
-                                <div
-                                    className={classNames(styles.disLikeIcon, {
-                                        [styles.darkDislikeIcon]: themeValue === Theme.dark,
-                                    })}
-                                >
-                                    <DislikeIcon />
-                                </div>
-                            ) : (
-                                <div
-                                    className={classNames(styles.likeIcon, {
-                                        [styles.darkLikeIcon]: themeValue === Theme.dark,
-                                    })}
-                                >
-                                    <LikeIcon />
-                                </div>
-                            )}
+                        <div className={classNames(styles.postImage)}>
+                            <img src={image} alt="imagePost" />
                         </div>
                     </div>
                     <div
-                        className={classNames(styles.buttonInfo, {
-                            [styles.darkButtonInfo]: themeValue === Theme.dark,
+                        className={classNames(styles.postButton, {
+                            [styles.darkPostButton]: themeValue === Theme.dark,
                         })}
                     >
                         <div
-                            className={classNames(styles.save, {
-                                [styles.darkSave]: themeValue === Theme.dark,
+                            className={classNames(styles.buttonLike, {
+                                [styles.darkButtonLike]: themeValue === Theme.dark,
                             })}
-                            onClick={() => { }}
                         >
-                            <SaveIcon />
+                            <div
+                                className={classNames(styles.like, {
+                                    [styles.darkLike]: themeValue === Theme.dark,
+                                })}
+                                // onClick={toggleLike(isLike)}
+                                onClick={() => { }}
+                            >
+                                {likeStatus === false ? (
+                                    <div
+                                        className={classNames(styles.disLikeIcon, {
+                                            [styles.darkDislikeIcon]: themeValue === Theme.dark,
+                                        })}
+                                    >
+                                        <DislikeIcon />
+                                    </div>
+                                ) : (
+                                    <div
+                                        className={classNames(styles.likeIcon, {
+                                            [styles.darkLikeIcon]: themeValue === Theme.dark,
+                                        })}
+                                    >
+                                        <LikeIcon />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div
-                            className={classNames(styles.edit, {
-                                [styles.darkEdit]: themeValue === Theme.dark,
+                            className={classNames(styles.buttonInfo, {
+                                [styles.darkButtonInfo]: themeValue === Theme.dark,
                             })}
                         >
-                            <EditIcon />
-                        </div>
-                        <div
-                            className={classNames(styles.delete, {
-                                [styles.darkDelete]: themeValue === Theme.dark,
-                            })}
-                            onClick={() => handleDelete(id)}
-                        >
-                            <DeleteIcon />
+                            <div
+                                className={classNames(styles.save, {
+                                    [styles.darkSave]: themeValue === Theme.dark,
+                                })}
+                                onClick={() => { }}
+                            >
+                                <SaveIcon />
+                            </div>
+                            <div
+                                className={classNames(styles.edit, {
+                                    [styles.darkEdit]: themeValue === Theme.dark,
+                                })}
+                            >
+                                <EditIcon />
+                            </div>
+                            <div
+                                className={classNames(styles.delete, {
+                                    [styles.darkDelete]: themeValue === Theme.dark,
+                                })}
+                                onClick={handleDeleteClick}
+                            >
+                                <DeleteIcon />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
