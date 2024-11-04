@@ -14,6 +14,10 @@ import { dbRealtime, deletePost } from "../../firebase";
 import { remove } from "firebase/database";
 import { ref } from "firebase/storage";
 import Loading from "../Loading";
+import Button from "../Button";
+import { ButtonSize } from "../Button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { UserSelectors } from "../../redux/store/slices/userSlice";
 
 const Post: FC<PostProps> = ({
     type,
@@ -30,7 +34,9 @@ const Post: FC<PostProps> = ({
     const [likeStatus, setLikeState] = useState<boolean>(false);
     const [loading, setLoadnig] = useState<boolean>(false);
     const { themeValue } = useThemeContext();
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const user = useSelector(UserSelectors.getUser);
 
     const handleDeleteClick = async () => {
         setLoadnig(true);
@@ -44,9 +50,6 @@ const Post: FC<PostProps> = ({
             console.error("Error deleting post:", error);
         }
     };
-    const handeBack = useCallback(() => {
-        navigate(RoutesList.Home);
-    }, []);
 
     return (
         <div
@@ -169,13 +172,16 @@ const Post: FC<PostProps> = ({
                             >
                                 <EditIcon />
                             </div>
-                            <div
-                                className={classNames(styles.delete, {
-                                    [styles.darkDelete]: themeValue === Theme.dark,
-                                })}
-                                onClick={handleDeleteClick}
-                            >
-                                <DeleteIcon />
+                            <div>
+                                <Button
+                                    disabled
+                                    type={ButtonSize.delete}
+                                    title={<DeleteIcon />}
+                                    onClick={handleDeleteClick}
+                                    className={classNames(styles.delete, {
+                                        [styles.darkDelete]: themeValue === Theme.dark,
+                                    })}
+                                />
                             </div>
                         </div>
                     </div>

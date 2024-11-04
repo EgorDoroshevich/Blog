@@ -108,8 +108,8 @@
   }
 }
 .disabled {
-  width: 241px;
-  line-height: 38px;
+  // width: 241px;
+  // line-height: 38px;
   padding: 16px, 32px, 16px, 32px;
   gap: 10px;
   border: 2px solid transparent;
@@ -117,23 +117,25 @@
   background-color: #e8e8e8;
   text-align: center;
   color: #8d8e97;
+  svg > path {
+    fill: #8d8e97;
+  }
+  &:hover {
+    transition: 0.5s;
+    cursor: not-allowed;
+  }
 }
 .delete {
-  width: 143px;
-  line-height: 38px;
   padding: 16px, 32px, 16px, 32px;
   gap: 10px;
-  border: 2px solid transparent;
   border-radius: 2px;
   background-color: transparent;
   transition: 0.5s;
   text-align: center;
-  color: #c32d2d;
   cursor: pointer;
   &:hover {
     transition: 0.5s;
-    color: #ff0303;
-    cursor: pointer;
+    // cursor: pointer;
   }
 }
 .cancel {
