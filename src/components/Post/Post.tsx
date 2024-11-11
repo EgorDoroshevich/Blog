@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./Post.module.scss";
 import { PostProps, Theme } from "../config";
 import LikeIcon from "../../icons/LikeIcon/LikeIcon";
@@ -6,13 +6,9 @@ import DislikeIcon from "../../icons/DislikeIcon/DislikeIcon";
 import SaveIcon from "../../icons/SaveIcon/SaveIcon";
 import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
-import { useNavigate } from "react-router-dom";
-import { RoutesList } from "../Router/Router";
 import DeleteIcon from "../../icons/Delete/DeleteIcon";
 import EditIcon from "../../icons/EditIcon/EditIcon";
 import { dbRealtime, deletePost } from "../../firebase";
-import { remove } from "firebase/database";
-import { ref } from "firebase/storage";
 import Loading from "../Loading";
 import Button from "../Button";
 import { ButtonSize } from "../Button/Button";
@@ -50,6 +46,7 @@ const Post: FC<PostProps> = ({
             console.error("Error deleting post:", error);
         }
     };
+
 
     return (
         <div
@@ -130,7 +127,6 @@ const Post: FC<PostProps> = ({
                                 className={classNames(styles.like, {
                                     [styles.darkLike]: themeValue === Theme.dark,
                                 })}
-                                // onClick={toggleLike(isLike)}
                                 onClick={() => { }}
                             >
                                 {likeStatus === false ? (
@@ -174,7 +170,7 @@ const Post: FC<PostProps> = ({
                             </div>
                             <div>
                                 <Button
-                                    disabled
+                                    // disabled
                                     type={ButtonSize.delete}
                                     title={<DeleteIcon />}
                                     onClick={handleDeleteClick}

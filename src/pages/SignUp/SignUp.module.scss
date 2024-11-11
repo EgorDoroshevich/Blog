@@ -1,4 +1,5 @@
 @import "src/styles/colors";
+@import "src/styles/mixins";
 .container {
   width: 100%;
   display: flex;
@@ -9,6 +10,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
     .header {
       width: 400px;
       font-size: 40px;
@@ -21,17 +25,15 @@
       font-size: 36px;
       font-weight: 400;
       color: #496b6e;
+      @media (max-width: 450px) {
+        width: 330px;
+      }
+      @media (max-width: 360px) {
+        width: 280px;
+      }
     }
     .signUp {
-      padding: 20px 0;
-      width: 400px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      font-family: "PTSerif";
-      font-size: 14px;
-      font-weight: 100;
-      color: #496b6e;
+      @include signUp;
       .span {
         padding: 0px 10px;
         color: #0099ff;
@@ -44,49 +46,22 @@
       }
     }
     .remember {
-      padding: 20px 0;
-      width: 400px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include remember;
       .checkbox {
-        display: flex;
-        align-items: center;
-        color: #496b6e;
-        font-family: "PTSerif";
-        font-size: 14px;
-        font-weight: 100;
+        @include checkbox;
       }
     }
   }
 }
 
 .container_item {
-  width: 400px;
-  padding: 10px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  @include container_item;
 }
 .label {
-  color: #496b6e;
-  font-family: "PTSerif";
-  font-size: 18px;
-  font-weight: 100;
-  padding: 10px 2px;
+  @include label;
 }
 .input__item {
-  width: 400px;
-  line-height: 25px;
-  font-size: 14px;
-  border: 1px solid #8d8e97;
-  border-radius: 5px;
-  padding: 3px;
-  color: #496b6e;
-  font-family: "PTSerif";
-  font-weight: 100;
-  background-color: #f3f7fa;
+  @include input_item;
 }
 
 .theme {
@@ -101,6 +76,9 @@
     height: 100%;
     object-fit: cover;
   }
+  @media (max-width: 1024px) {
+    display: none;
+  }
 }
 .forgotPassorword {
   color: #0099ff;
@@ -114,69 +92,63 @@
   }
 }
 .darkContainerRight {
-  background-color: #272121;
-  color: #272121;
+  background-color: $bc_black;
+  color: $bc_black;
 }
 
 .darkForgotPassorword {
-  color: #803b3b;
+  color: $secondary;
   &:hover {
-    color: #f30808;
+    color: $error;
   }
 }
 .darkContainer {
   .darkContainerRight {
     .darkTheme {
       &:hover {
-        background-color: #272121;
+        background-color: $bc_black;
       }
       svg > path {
-        fill: #fff;
+        fill: $white;
         &:hover {
-          fill: #000000;
-          background-color: #272121;
+          fill: $black;
+          background-color: $bc_black;
         }
       }
     }
     .darkHeader {
-      color: #cac5c5;
+      color: $medium;
       font-family: "PTSerif";
       font-size: 36px;
       font-weight: 400;
     }
     .darkSignUp {
-      color: #cac5c5;
+      color: $medium;
       .darkSpan {
-        color: #803b3b;
+        color: $secondary;
         &:hover {
-          color: #f30808;
+          color: $error;
         }
       }
     }
     .darkContainerRegister {
       .darkContainer_item {
         .darkLabel {
-          color: #cac5c5;
-          font-family: "PTSerif";
-          font-size: 16px;
-          font-weight: 100;
+          @include dark_label;
         }
         .darkLabelConf {
-          color: #cac5c5;
-          font-family: "PTSerif";
-          font-size: 16px;
-          font-weight: 100;
+          @include dark_label;
         }
       }
     }
     .darkRemember {
-      color: #cac5c5;
+      color: $medium;
       .darkCheckbox {
-        color: #803b3b;
+        color: $secondary;
       }
     }
     .darkSignIn {
-      color: #803b3b;
+      color: $secondary;
     }
   }
   .darkContainerImage {

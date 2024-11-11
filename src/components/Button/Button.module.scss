@@ -1,3 +1,5 @@
+@import "src/styles/colors";
+
 .large {
   width: 400px;
   line-height: 32px;
@@ -8,7 +10,7 @@
   background-color: #3486c0;
   transition: 0.5s;
   text-align: center;
-  color: #fff;
+  color: $white;
   font-family: "PTSerif";
   font-size: 14px;
   font-weight: 100;
@@ -16,6 +18,12 @@
   &:hover {
     background-color: #375265;
     cursor: pointer;
+  }
+  @media (max-width: 450px) {
+    width: 330px;
+  }
+  @media (max-width: 360px) {
+    width: 280px;
   }
 }
 .middle {
@@ -49,7 +57,7 @@
   cursor: pointer;
   &:hover {
     background-color: #7aa2bc;
-    color: #fff;
+    color: $white;
     cursor: pointer;
   }
 }
@@ -60,14 +68,14 @@
   gap: 10px;
   border: 1px solid rgba(232, 232, 232, 0.2);
   border-radius: 2px;
-  color: #803b3b;
-  background-color: #272121;
+  color: $secondary;
+  background-color: $bc_black;
   transition: 0.5s;
   text-align: center;
   cursor: pointer;
   &:hover {
-    background-color: #412420;
-    color: #fff;
+    background-color: $secondary;
+    color: $white;
     cursor: pointer;
   }
 }
@@ -108,17 +116,15 @@
   }
 }
 .disabled {
-  // width: 241px;
-  // line-height: 38px;
   padding: 16px, 32px, 16px, 32px;
   gap: 10px;
   border: 2px solid transparent;
   border-radius: 2px;
   background-color: #e8e8e8;
   text-align: center;
-  color: #8d8e97;
+  color: $gray;
   svg > path {
-    fill: #8d8e97;
+    fill: $gray;
   }
   &:hover {
     transition: 0.5s;
@@ -171,7 +177,7 @@
   cursor: pointer;
   &:hover {
     background-color: #7aa2bc;
-    color: #fff;
+    color: $white;
     cursor: pointer;
   }
 }
@@ -183,15 +189,15 @@
   align-items: center;
   justify-content: center;
   border: 1px solid #e8e8e8;
-  color: #803b3b;
+  color: $secondary;
   border-radius: 10px;
-  background-color: #272121;
+  background-color: $bc_black;
   transition: 0.5s;
   text-align: center;
   cursor: pointer;
   &:hover {
     background-color: #412420;
-    color: #fff;
+    color: $white;
     cursor: pointer;
   }
 }
@@ -232,6 +238,12 @@
     cursor: pointer;
     color: #64a2e1;
   }
+  @media (max-width: 450px) {
+    width: 330px;
+  }
+  @media (max-width: 360px) {
+    width: 280px;
+  }
 }
 .googleDark {
   width: 400px;
@@ -251,7 +263,13 @@
   &:hover {
     background-color: #a1a1a1;
     cursor: pointer;
-    color: #f30808;
+    color: $error;
+  }
+  @media (max-width: 450px) {
+    width: 330px;
+  }
+  @media (max-width: 360px) {
+    width: 280px;
   }
 }
 .largeDark {
@@ -264,7 +282,7 @@
   background-color: #e7eff7;
   transition: 0.5s;
   text-align: center;
-  color: #803b3b;
+  color: $secondary;
   font-family: "PTSerif";
   font-size: 14px;
   font-weight: 100;
@@ -272,6 +290,12 @@
   &:hover {
     background-color: #a1a1a1;
     cursor: pointer;
-    color: #f30808;
+    color: $error;
+  }
+  @media (max-width: 450px) {
+    width: 330px;
+  }
+  @media (max-width: 360px) {
+    width: 280px;
   }
 }

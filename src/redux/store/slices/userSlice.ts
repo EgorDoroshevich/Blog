@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 interface UserState {
@@ -65,14 +65,17 @@ export const { setUserSignIn, removeUser, setUserSignUp } = userSlice.actions;
 
 // Селекторы для получения данных пользователя из состояния
 export const UserSelectors = {
-  getUser: (state: RootState) => ({
-    email: state.user.email,
-    password: state.user.password,
-    id: state.user.id,
-    name: state.user.name,
-    auth: state.user.auth,
-    token: state.user.token,
-  }),
+  getUser: createSelector(
+    (state: RootState) => state.user,
+    (user) => ({
+      email: user.email,
+      password: user.password,
+      id: user.id,
+      name: user.name,
+      auth: user.auth,
+      token: user.token,
+    })
+  ),
 };
 
 export default userSlice.reducer;

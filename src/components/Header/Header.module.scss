@@ -1,3 +1,4 @@
+@import "src/styles/colors";
 .header {
   background-color: #c6d7e3;
   border: 1px solid rgba(6, 75, 102, 0.3);
@@ -22,10 +23,10 @@
 }
 
 .darkHeader {
-  background-color: #272121;
+  background-color: $bc_black;
   border: 1px solid rgba(255, 255, 255, 0.3);
   .darkContainer {
-    background-color: #272121;
+    background-color: $bc_black;
     .darkHeaderButton {
       height: 64px;
       display: flex;
@@ -34,7 +35,7 @@
       .burger {
         border-right: 1px solid rgba(255, 255, 255, 0.3);
         svg > path {
-          fill: #803b3b;
+          fill: $secondary;
         }
       }
     }

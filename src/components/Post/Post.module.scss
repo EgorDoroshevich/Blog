@@ -1,22 +1,25 @@
+@import "src/styles/colors";
+@import "src/styles/mixins";
+
 .card {
   .postContainer {
     border-bottom: 1px solid #dadada;
-    margin: 10px 20px 10px 10px;
     padding: 10px 0px;
     .postHead {
       display: flex;
       justify-content: space-between;
       .postText {
         margin-right: 30px;
+        max-width: 750px;
         .postHead__item {
-          width: 100px;
+          max-width: 100px;
           font-weight: 400;
           font-size: 16px;
           line-height: 24px;
           display: flex;
           justify-content: space-between;
           flex-direction: column;
-          color: #8d8e97;
+          color: $gray;
           font-family: "PTSerif";
           .author {
             display: flex;
@@ -27,25 +30,24 @@
           }
         }
         .postTitle {
-          padding: 10px 0;
-          font-weight: 700;
+          @include postText;
+          font-weight: 600;
           font-size: 32px;
           line-height: 44px;
-          color: #313037;
-          font-family: "PTSerif";
+          color: $primary;
+          flex: 1;
         }
         .postText {
-          padding: 10px 0;
+          @include postText;
           font-weight: 400;
           font-size: 16px;
           line-height: 28px;
-          color: #8d8e97;
-          font-family: "PTSerif";
+          color: $gray;
         }
       }
       .postImage {
-        width: 400px;
-        height: 244px;
+        width: 250px;
+        height: 250px;
         overflow: hidden;
         display: flex;
         justify-content: center;
@@ -55,6 +57,9 @@
           height: 100%;
           object-fit: cover;
           object-position: center;
+        }
+        @media (max-width: 960px) {
+          display: none;
         }
       }
     }
@@ -225,7 +230,7 @@
           color: #d8d8d8;
         }
         .darkPostTitle {
-          color: #fff;
+          color: $white;
         }
         .darkPostText {
           color: #d8d8d8;
@@ -239,12 +244,12 @@
             svg > path {
             }
             svg > path {
-              stroke: #fff;
+              stroke: $white;
             }
           }
           .darkLikeIcon {
             svg > path {
-              fill: #fff;
+              fill: $white;
             }
           }
         }
@@ -254,36 +259,36 @@
         .darkSave {
           transition: 0.5;
           svg > path {
-            fill: #fff;
+            fill: $white;
           }
           &:hover {
             transition: 0.5;
             svg > path {
-              fill: #c87272;
+              fill: $secondary;
             }
           }
         }
         .darkDelete {
           transition: 0.5;
           svg > path {
-            fill: #fff;
+            fill: $white;
           }
           &:hover {
             transition: 0.5;
             svg > path {
-              fill: #c87272;
+              fill: $secondary;
             }
           }
         }
         .darkEdit {
           transition: 0.5;
           svg > path {
-            fill: #fff;
+            fill: $white;
           }
           &:hover {
             transition: 0.5;
             svg > path {
-              fill: #c87272;
+              fill: $secondary;
             }
           }
         }

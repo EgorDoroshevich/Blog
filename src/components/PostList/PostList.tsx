@@ -5,6 +5,7 @@ import Post from "../Post/Post";
 import { useThemeContext } from "../../context/Theme";
 import classNames from "classnames";
 import axios from "axios";
+import Loading from "../Loading";
 
 export type CardList = {
     cardList: PostsList;
@@ -14,7 +15,7 @@ const PostList: FC<CardList> = ({ cardList }) => {
     const { themeValue } = useThemeContext();
     const [posts, setPosts] = useState<PostsList>(cardList);
     const [error, setError] = useState<string | null>(null);
-    // const [loading, setLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -34,7 +35,6 @@ const PostList: FC<CardList> = ({ cardList }) => {
                         type: PostSize.card,
                         author: item.name,
                     }));
-
                     console.log(post);
                     setPosts(post);
                 } else {
@@ -45,7 +45,6 @@ const PostList: FC<CardList> = ({ cardList }) => {
                 setError("Не удалось загрузить посты.");
             }
         };
-
         fetchPosts();
     }, []);
 
@@ -65,7 +64,7 @@ const PostList: FC<CardList> = ({ cardList }) => {
                     [styles.darkCard]: themeValue === Theme.dark,
                 })}
             >
-                {posts.map((el, id) => {
+                {[...posts].reverse().map((el) => {
                     return <Post key={el.id} {...el} onDelete={handleDelete} />;
                 })}
             </div>

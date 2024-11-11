@@ -1,3 +1,4 @@
+@import "src/styles/colors";
 .Loading {
   display: flex;
   align-items: center;
@@ -14,6 +15,6 @@
   justify-content: center;
   height: 100vh;
   svg > g > circle {
-    stroke: #803b3b;
+    stroke: $secondary;
   }
 }

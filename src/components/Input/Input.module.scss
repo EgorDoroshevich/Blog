@@ -1,8 +1,9 @@
+@import "src/styles/colors";
 .input {
   width: 550px;
   line-height: 25px;
   font-size: 14px;
-  border: 1px solid #8d8e97;
+  border: 1px solid $gray;
   border-radius: 5px;
   padding: 3px;
   color: #000;
@@ -17,7 +18,7 @@
   border-radius: 2px;
   padding: 10px;
   font-size: 16px;
-  color: #8d8e97;
+  color: $gray;
   background-color: #e8e8e8;
 }
 .title {
@@ -28,7 +29,7 @@
   padding: 10px 2px;
 }
 .darkTitle {
-  color: #fff;
+  color: $white;
   font-family: "PTSerif";
   font-size: 16px;
   font-weight: 100;
@@ -37,10 +38,10 @@
   width: 550px;
   line-height: 25px;
   font-size: 14px;
-  border: 1px solid #8d8e97;
+  border: 1px solid $gray;
   border-radius: 5px;
   padding: 3px;
-  color: #000;
+  color: $black;
   font-family: "PTSerif";
   font-weight: 100;
   background-color: #f3f7fa;

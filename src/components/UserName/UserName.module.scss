@@ -1,3 +1,4 @@
+@import "src/styles/colors";
 .container {
   width: 150px;
   display: flex;
@@ -19,9 +20,9 @@
   }
 }
 .darkContainer {
-  background-color: #272121;
+  background-color: $bc_black;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   .darkName {
-    color: #fff;
+    color: $white;
   }
 }

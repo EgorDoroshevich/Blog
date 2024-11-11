@@ -1,12 +1,16 @@
+@import "src/styles/colors";
 .container {
   padding-left: 240px;
   padding-top: 10px;
   padding-bottom: 30px;
   padding-right: 20px;
+  @media (max-width: 733px) {
+    padding-left: 20px;
+  }
 }
 .darkContainer {
-  background-color: #272121;
+  background-color: $bc_black;
 }
 .darkCard {
-  color: #fff;
+  color: $white;
 }

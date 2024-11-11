@@ -1,6 +1,9 @@
+@import "src/styles/mixins";
+@import "src/styles/colors";
+
 .addpost {
   height: 100vh;
-  background-color: #fff;
+  background-color: $white;
 }
 .container {
   display: flex;
@@ -8,7 +11,7 @@
   flex-direction: column;
   flex: 1;
   margin: 0px auto;
-  background-color: #fff;
+  background-color: $white;
   .home {
     width: 600px;
     color: #313037;
@@ -40,14 +43,14 @@
   }
 }
 .darkContainer {
-  background-color: #272121;
+  background-color: $bc_black;
   height: 100vh;
 }
 .darkHome {
-  color: #ffffff;
+  color: $white;
 }
 .darkHomeP {
-  color: #ffffff;
+  color: $white;
   &:hover {
     color: #5360cd;
     cursor: pointer;
@@ -58,20 +61,16 @@
   width: 550px;
   line-height: 25px;
   font-size: 14px;
-  border: 1px solid #8d8e97;
+  border: 1px solid $gray;
   border-radius: 5px;
   padding: 3px;
-  color: #000;
+  color: $black;
   font-family: "PTSerif";
   font-weight: 100;
-  background-color: #f3f7fa;
+  background-color: $light;
 }
 .label {
-  color: #496b6e;
-  font-family: "PTSerif";
-  font-size: 18px;
-  font-weight: 100;
-  padding: 10px 2px;
+  @include label;
 }
 .container_item {
   width: 400px;

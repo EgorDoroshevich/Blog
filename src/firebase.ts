@@ -25,13 +25,12 @@ export const database = getFirestore(app);
 export const dbRealtime = getDatabase(app);
 export const storage = getStorage(app);
 
-export const deletePost = async (postId: any) => {
+export const deletePost = async (postId: string) => {
   try {
-    const postRef = ref(dbRealtime, `posts/${postId}`); // Указываем путь к посту
-    await remove(postRef); // Удаляем пост
+    const postRef = ref(dbRealtime, `posts/${postId}`);
+    await remove(postRef);
     console.log(` delete post ${postId}`);
   } catch (error) {
     console.error("Error deleting post:", error);
-    // throw error; // Можно выбросить ошибку для обработки ее в вызывающем коде
   }
 };

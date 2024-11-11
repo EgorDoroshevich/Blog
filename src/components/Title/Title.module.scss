@@ -1,15 +1,9 @@
-@mixin Title {
-  font-family: "PTSerif";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 56px;
-  line-height: 80px;
-  margin: auto;
-}
+@import "src/styles/mixins";
+@import "src/styles/colors";
 .title {
   @include Title();
   color: #313037;
 }
 .darkTitle {
-  color: #fff;
+  color: $white;
 }

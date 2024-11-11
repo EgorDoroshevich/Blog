@@ -1,11 +1,12 @@
+@import "src/styles/colors";
 .textarea {
   width: 544px;
   height: 80px;
   padding: 10px;
-  border: 1px solid #8d8e97;
+  border: 1px solid $gray;
   border-radius: 5px;
   font-size: 14px;
-  color: #000;
+  color: $black;
   font-family: "PTSerif";
   font-weight: 100;
   background-color: #f3f7fa;
@@ -17,12 +18,12 @@
   line-height: 20px;
 }
 .darkTitle {
-  color: #ffffff;
+  color: $white;
 }
 .darkTextarea {
   width: 550px;
-  color: #000;
+  color: $black;
   font-family: "PTSerif";
-  background-color: #fff;
-  border: 1px solid #8d8e97;
+  background-color: $white;
+  border: 1px solid $gray;
 }
