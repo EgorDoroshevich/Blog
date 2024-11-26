@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SignIn.module.scss";
 import { useThemeContext } from "../../context/Theme";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { Theme } from "../../components/config";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
 import Loading from "../../components/Loading";
 import { setUserSignIn } from "../../redux/store/slices/userSlice";
+import { setRoute } from "../../redux/store/slices/routeSlice";
 type SignInProps = {
     setLogin: () => void;
 };
@@ -25,18 +26,32 @@ const SignIn = ({ setLogin }: SignInProps) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [rememberMe, setRememberMe] = useState<boolean>(false); // доделать!
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            dispatch(
+                setUserSignIn({
+                    name: user.name,
+                    email: user.email,
+                    id: user.id,
+                    token: user.token,
+                })
+            );
+            navigate(RoutesList.Home);
+        }
+    }, [dispatch, navigate]);
 
     const handleSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-
         if (!email || !password) {
             alert("Please enter both email and password");
             setLoading(false);
             return;
         }
-
         try {
             const auth = getAuth();
             const userCredential = await signInWithEmailAndPassword(
@@ -45,16 +60,33 @@ const SignIn = ({ setLogin }: SignInProps) => {
                 password
             );
             const { user } = userCredential;
+            console.log(user);
+            const token = await user.getIdToken();
+            // console.log("Saved token:", token);
 
+            if (rememberMe === true) {
+                dispatch(setRoute(true));
+                const userData = {
+                    name: user.displayName || "",
+                    email: user.email || "",
+                    id: user.uid,
+                    token: token,
+                };
+                localStorage.setItem("user", JSON.stringify(userData));
+
+                console.log("User saved in LocalStorage:", userData);
+            } else {
+                localStorage.removeItem("user");
+                console.log("User removed from LocalStorage");
+            }
             dispatch(
                 setUserSignIn({
                     name: user.displayName || "",
                     email: user.email || "",
                     id: user.uid,
-                    token: user.refreshToken,
+                    token: token,
                 })
             );
-
             setLoading(false);
             setLogin();
             navigate(RoutesList.Home);
@@ -157,7 +189,10 @@ const SignIn = ({ setLogin }: SignInProps) => {
 
                         <div className={styles.remember}>
                             <div className={styles.checkbox}>
-                                <Checkbox defaultChecked />
+                                <Checkbox
+                                    checked={rememberMe}
+                                    onChange={() => setRememberMe(!rememberMe)}
+                                />
                                 <p>Remember me</p>
                             </div>
                             <div className={styles.forgotPassword} onClick={() => { }}>

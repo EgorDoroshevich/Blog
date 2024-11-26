@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { useThemeContext } from "../../context/Theme";
 import DeleteIcon from "../../icons/Delete/DeleteIcon";
 import EditIcon from "../../icons/EditIcon/EditIcon";
-import { dbRealtime, deletePost } from "../../firebase";
+import { deletePost } from "../../firebase";
 import Loading from "../Loading";
 import Button from "../Button";
 import { ButtonSize } from "../Button/Button";
@@ -18,6 +18,7 @@ import { UserSelectors } from "../../redux/store/slices/userSlice";
 const Post: FC<PostProps> = ({
     type,
     id,
+    postKey,
     like,
     image,
     text,
@@ -28,25 +29,23 @@ const Post: FC<PostProps> = ({
 }) => {
     const PostType = styles[type];
     const [likeStatus, setLikeState] = useState<boolean>(false);
-    const [loading, setLoadnig] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const { themeValue } = useThemeContext();
     const dispatch = useDispatch();
 
     const user = useSelector(UserSelectors.getUser);
 
     const handleDeleteClick = async () => {
-        setLoadnig(true);
-        try {
-            await deletePost(id);
+        setLoading(true);
+        const isDeleted = await deletePost(postKey);
+        if (isDeleted) {
             console.log("Post deleted successfully");
-            onDelete && onDelete(id);
-            setLoadnig(false);
-        } catch (error) {
-            setLoadnig(false);
-            console.error("Error deleting post:", error);
+            onDelete && onDelete(postKey);
+        } else {
+            console.error("Failed to delete post");
         }
+        setLoading(false);
     };
-
 
     return (
         <div

@@ -29,7 +29,7 @@ const userSlice = createSlice({
         email: string;
         id: string;
         token: string;
-        name: string;
+        name?: string;
       }>
     ) => {
       state.email = action.payload.email;

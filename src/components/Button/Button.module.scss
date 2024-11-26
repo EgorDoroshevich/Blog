@@ -180,6 +180,11 @@
     color: $white;
     cursor: pointer;
   }
+  @media (max-width: 425px) {
+    width: 100%;
+    flex: 1;
+    border-radius: 0px;
+  }
 }
 .darkAside {
   width: 236px;
@@ -199,6 +204,12 @@
     background-color: #412420;
     color: $white;
     cursor: pointer;
+  }
+  @media (max-width: 425px) {
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid #e8e8e8;
+    padding: auto;
   }
 }
 .themeButton {

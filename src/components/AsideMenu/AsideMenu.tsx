@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser } from "../../redux/store/slices/userSlice";
 import SunnyIcon from "../../icons/SunnyIcon/SunnyIcon";
 import { RouteSelectors, setRoute } from "../../redux/store/slices/routeSlice";
-import Loading from "../Loading";
 
 const AsideMenu = () => {
     const dispatch = useDispatch();
@@ -33,6 +32,7 @@ const AsideMenu = () => {
     };
 
     const onClickLogOut = () => {
+        localStorage.removeItem("user");
         dispatch(removeUser());
         dispatch(setRoute(false));
         navigate(RoutesList.SignIn);

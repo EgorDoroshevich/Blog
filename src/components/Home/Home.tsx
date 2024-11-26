@@ -13,7 +13,6 @@ const Home = () => {
     const [error, setError] = useState<string | null>(null);
     console.log(posts);
 
-
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -23,7 +22,8 @@ const Home = () => {
                 if (response.data) {
                     console.log(response.data);
 
-                    const post = Object.values(response.data).map((item: any) => ({
+                    const post = Object.entries(response.data).map(([key, item]: [string, any]) => ({
+                        postKey: key,
                         id: item.id,
                         date: item.date,
                         image: item.image,

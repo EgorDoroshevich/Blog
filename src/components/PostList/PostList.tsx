@@ -5,7 +5,7 @@ import Post from "../Post/Post";
 import { useThemeContext } from "../../context/Theme";
 import classNames from "classnames";
 import axios from "axios";
-import Loading from "../Loading";
+import { useNavigate } from "react-router-dom";
 
 export type CardList = {
     cardList: PostsList;
@@ -16,7 +16,7 @@ const PostList: FC<CardList> = ({ cardList }) => {
     const [posts, setPosts] = useState<PostsList>(cardList);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -26,15 +26,18 @@ const PostList: FC<CardList> = ({ cardList }) => {
                 if (response.data) {
                     console.log(response.data);
 
-                    const post = Object.values(response.data).map((item: any) => ({
-                        id: item.id,
-                        date: item.date,
-                        image: item.image,
-                        text: item.text,
-                        title: item.title,
-                        type: PostSize.card,
-                        author: item.name,
-                    }));
+                    const post = Object.entries(response.data).map(
+                        ([key, item]: [string, any]) => ({
+                            postKey: key,
+                            id: item.id,
+                            date: item.date,
+                            image: item.image,
+                            text: item.text,
+                            title: item.title,
+                            type: PostSize.card,
+                            author: item.name,
+                        })
+                    );
                     console.log(post);
                     setPosts(post);
                 } else {
@@ -48,11 +51,39 @@ const PostList: FC<CardList> = ({ cardList }) => {
         fetchPosts();
     }, []);
 
-    console.log(posts);
+    const handleDelete = async (postKey: string) => {
+        try {
+            const userData = localStorage.getItem("user");
 
-    const handleDelete = (postId: string) => {
-        setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+            if (!userData) {
+                console.error("User is not authenticated");
+                return;
+            } else {
+                const response = await fetch(
+                    `https://myth-p-default-rtdb.firebaseio.com/posts/${postKey}.json`,
+                    {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                );
+                console.log("Response from delete request:", response);
+
+                if (response.ok) {
+                    setPosts((prevPosts) =>
+                        prevPosts.filter((post) => post.postKey !== postKey)
+                    );
+                    console.log("Post deleted successfully");
+                } else {
+                    console.error("Failed to delete post. Status:", response.status);
+                }
+            }
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
     };
+
     return (
         <div
             className={classNames(styles.container, {
@@ -65,7 +96,14 @@ const PostList: FC<CardList> = ({ cardList }) => {
                 })}
             >
                 {[...posts].reverse().map((el) => {
-                    return <Post key={el.id} {...el} onDelete={handleDelete} />;
+                    return (
+                        <Post
+                            key={el.id}
+                            {...el}
+                            postKey={el.postKey}
+                            onDelete={(postKey: string) => handleDelete(postKey)}
+                        />
+                    );
                 })}
             </div>
         </div>

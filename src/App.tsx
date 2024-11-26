@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./App.css";
-import { PostSize, Theme } from "./components/config";
+import { Theme } from "./components/config";
 import { ThemeProvider } from "./context/Theme";
 import AppRouter from "./components/Router/Router";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeSelectors, setThemeValue } from "./redux/store/slices/themeSlice";
-import app from "./firebase";
-import Home from "./components/Home";
 
 function App() {
-  const dispath = useDispatch();
+  const dispatch = useDispatch();
 
   const themeValue = useSelector(ThemeSelectors.getIsTheme);
 
   const onChangeTheme = (value: Theme) => () => {
-    dispath(setThemeValue(value));
+    dispatch(setThemeValue(value));
   };
+
+
   return (
     <div>
       <ThemeProvider onChangeTheme={onChangeTheme} themeValue={themeValue}>

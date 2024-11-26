@@ -5,7 +5,13 @@
     left: 0;
     top: 66px;
     background-color: $white;
+    @media (max-width: 425px) {
+      display: flex;
+      width: 100%;
+    }
     .buttons {
+      width: 100%;
+      flex: 1;
       background-color: transparent;
       display: flex;
       flex-direction: column;
@@ -17,6 +23,10 @@
   background-color: $bc_black;
   .darkContainer {
     background-color: $bc_black;
+    @media (max-width: 425px) {
+      display: flex;
+      width: 100%;
+    }
   }
 }
 .themeButtons {

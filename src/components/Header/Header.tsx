@@ -23,7 +23,14 @@ const Header = () => {
     };
 
     useEffect(() => {
-        setName(name);
+        // Извлекаем данные пользователя из LocalStorage
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            const user = JSON.parse(storedUser); // Преобразуем строку в объект
+            console.log(user);
+            setName(user.name); // Устанавливаем имя в состояние
+        }
+        // setName(name);
     }, [userName]);
 
     const { themeValue } = useThemeContext();

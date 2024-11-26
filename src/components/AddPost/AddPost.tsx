@@ -46,7 +46,7 @@ const AddPost = () => {
     try {
       await uploadBytes(storageRef, file);
       const downloadURL = await getDownloadURL(storageRef);
-      return downloadURL; // Возвращаем URL загруженного файла
+      return downloadURL;
     } catch (error) {
       console.error("Error uploading file:", error);
       return null;

@@ -19,6 +19,7 @@ export enum PostSize {
 export type PostProps = {
   type: PostSize;
   id: string | any;
+  postKey: string | any;
   image: string;
   text: string;
   date: string;

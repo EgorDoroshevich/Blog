@@ -8,6 +8,7 @@ import MyFavorites from "../../pages/MyFavorites";
 import AsideMenu from "../AsideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteSelectors, setRoute } from "../../redux/store/slices/routeSlice";
+import { useEffect } from "react";
 
 export enum RoutesList {
     Home = "/home",
@@ -23,6 +24,15 @@ export enum RoutesList {
 const AppRouter = () => {
     const dispatch = useDispatch();
     const toggle = useSelector(RouteSelectors.getRoute);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            dispatch(setRoute(true));
+        } else {
+            dispatch(setRoute(false));
+        }
+    }, [dispatch]);
 
     const handleLogin = () => {
         dispatch(setRoute(true));
