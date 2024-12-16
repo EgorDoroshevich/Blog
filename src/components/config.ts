@@ -25,8 +25,10 @@ export type PostProps = {
   date: string;
   title: string;
   author?: string;
-  like?: boolean;
+  likeStatus: boolean;
+  like: number;
   onDelete?: (id: string) => void;
+  isLikedPost: (postKey: string, like: number, likeStatus: boolean) => void;
 };
 
 export type PostsList = PostProps[];

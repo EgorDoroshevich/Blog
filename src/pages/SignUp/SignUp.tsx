@@ -91,8 +91,6 @@ const SignUp = ({ setSignUp }: SignUpProps) => {
                     );
                 }
                 const dataUser = { email, password, auth, name };
-                console.log(dataUser);
-
                 setSignUp();
                 navigate(RoutesList.RegistrationConfirmation);
                 console.log("User created:", userCredential.user);

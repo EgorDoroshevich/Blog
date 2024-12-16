@@ -62,7 +62,6 @@ const SignIn = ({ setLogin }: SignInProps) => {
             const { user } = userCredential;
             console.log(user);
             const token = await user.getIdToken();
-            // console.log("Saved token:", token);
 
             if (rememberMe === true) {
                 dispatch(setRoute(true));

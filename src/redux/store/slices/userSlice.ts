@@ -63,7 +63,6 @@ const userSlice = createSlice({
 
 export const { setUserSignIn, removeUser, setUserSignUp } = userSlice.actions;
 
-// Селекторы для получения данных пользователя из состояния
 export const UserSelectors = {
   getUser: createSelector(
     (state: RootState) => state.user,

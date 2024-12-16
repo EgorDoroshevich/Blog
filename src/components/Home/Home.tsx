@@ -22,16 +22,21 @@ const Home = () => {
                 if (response.data) {
                     console.log(response.data);
 
-                    const post = Object.entries(response.data).map(([key, item]: [string, any]) => ({
-                        postKey: key,
-                        id: item.id,
-                        date: item.date,
-                        image: item.image,
-                        text: item.text,
-                        title: item.title,
-                        type: PostSize.card,
-                        author: item.name,
-                    }));
+                    const post = Object.entries(response.data).map(
+                        ([key, item]: [string, any]) => ({
+                            postKey: key,
+                            id: item.id,
+                            date: item.date,
+                            image: item.image,
+                            text: item.text,
+                            title: item.title,
+                            type: PostSize.card,
+                            author: item.name,
+                            like: item.like,
+                            likeStatus: item.likeStatus,
+                            isLikedPost: item.isLikedPost,
+                        })
+                    );
 
                     console.log(post);
                     setPosts(post);

@@ -22,7 +22,7 @@ const routeSlice = createSlice({
 export const { setRoute } = routeSlice.actions;
 
 export const RouteSelectors = {
-  getRoute: (state: RootState) => state.routeReducer.toggle,
+  getRoute: (state: RootState) => state.route.toggle,
 };
 
 export default routeSlice.reducer;

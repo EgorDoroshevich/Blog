@@ -64,6 +64,7 @@ const AddPost = () => {
       text,
       date: DATE,
       name: userName?.name || "",
+      like: 0,
     };
 
     try {
@@ -179,7 +180,7 @@ const AddPost = () => {
             })}
           >
             <Button
-              onClick={() => { }}
+              onClick={onNavigateToHome}
               title={"Cancel"}
               type={ButtonSize.cancel}
             />

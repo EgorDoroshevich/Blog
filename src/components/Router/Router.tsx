@@ -9,6 +9,7 @@ import AsideMenu from "../AsideMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { RouteSelectors, setRoute } from "../../redux/store/slices/routeSlice";
 import { useEffect } from "react";
+import EditPost from "../EditPost";
 
 export enum RoutesList {
     Home = "/home",
@@ -16,6 +17,7 @@ export enum RoutesList {
     SignIn = "/sign-in",
     RegistrationConfirmation = "/sign-up/confirm",
     AddPost = "/add-post",
+    EditPost = "/edit",
     AsideMenu = "/aside-menu",
     Default = "*",
     MyFavorites = "/myfavorites",
@@ -63,6 +65,7 @@ const AppRouter = () => {
                     path={RoutesList.RegistrationConfirmation}
                     element={<RegistrationConfirmation />}
                 />
+                <Route path={RoutesList.EditPost} element={<EditPost />} />
                 <Route path={RoutesList.AsideMenu} element={<AsideMenu />} />
                 <Route path={RoutesList.AddPost} element={<AddPost />} />
                 <Route path={RoutesList.MyFavorites} element={<MyFavorites />} />
