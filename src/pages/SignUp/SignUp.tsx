@@ -281,7 +281,7 @@ const SignUp = ({ setSignUp }: SignUpProps) => {
                                     className={classNames(styles.checkbox, {
                                         [styles.darkCheckbox]: themeValue === Theme.dark,
                                     })}
-                                    defaultChecked
+                                // defaultChecked
                                 />
                                 <p>Remember me</p>
                             </div>
